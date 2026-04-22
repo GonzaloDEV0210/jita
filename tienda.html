@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tienda — JITA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh;">
+<div id="jita-navbar"></div>
+<main style="flex:1;display:flex;align-items:center;justify-content:center;padding:5rem 1rem;background:linear-gradient(135deg,hsl(var(--accent) / .1),hsl(var(--background)),hsl(var(--primary) / .1));">
+  <div style="max-width:42rem;width:100%;" class="animate-scale-in">
+    <div class="jita-card" style="border:2px solid hsl(var(--primary) / .25);padding:3rem;text-align:center;">
+      <div style="display:flex;justify-content:center;margin-bottom:1.5rem;position:relative;">
+        <div style="position:relative;">
+          <span class="text-primary-color animate-pulse-soft" style="font-size:5rem;display:inline-block;line-height:1;" id="cart-icon"></span>
+          <span class="animate-bounce-soft" style="position:absolute;top:-.5rem;right:-.5rem;color:hsl(var(--accent));font-size:1.75rem;" id="sparkles-icon"></span>
+        </div>
+      </div>
+      <span class="badge" style="margin-bottom:1rem;display:inline-block;" data-i18n="store.badge"></span>
+      <h1 class="text-4xl md:text-5xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="store.title"></h1>
+      <p style="font-size:1.1rem;color:hsl(var(--muted-foreground));margin:0 auto 2rem;max-width:32rem;" data-i18n="store.subtitle"></p>
+      <div style="background:hsl(var(--primary) / .05);border:1px solid hsl(var(--primary) / .2);padding:1.5rem;border-radius:.5rem;margin-bottom:1.5rem;text-align:left;">
+        <h3 style="font-weight:600;margin:0 0 .75rem;display:flex;align-items:center;gap:.5rem;justify-content:center;font-family:Inter,sans-serif;" id="store-coming-h"></h3>
+        <ul style="color:hsl(var(--muted-foreground));margin:0 auto;padding-left:1rem;max-width:28rem;display:flex;flex-direction:column;gap:.5rem;">
+          <li data-i18n="store.item1"></li>
+          <li data-i18n="store.item2"></li>
+          <li data-i18n="store.item3"></li>
+          <li data-i18n="store.item4"></li>
+        </ul>
+      </div>
+      <div style="background:hsl(var(--accent) / .1);border:1px solid hsl(var(--accent) / .3);padding:1rem;border-radius:.5rem;margin-bottom:2rem;">
+        <p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0;" data-i18n="store.support"></p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="index.html">
+        <span id="back-icon"></span><span data-i18n="store.back"></span>
+      </a>
+    </div>
+  </div>
+</main>
+<div id="jita-footer"></div>
+
+<script src="translations.js"></script>
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('cart-icon').innerHTML = JITA.icon('cart');
+  document.getElementById('sparkles-icon').innerHTML = JITA.icon('sparkles');
+  document.getElementById('back-icon').innerHTML = JITA.icon('arrowLeft');
+  document.getElementById('store-coming-h').innerHTML = `${JITA.icon('sparkles')} <span data-i18n="store.coming"></span>`;
+  JITA.applyTranslations();
+});
+</script>
+</body>
+</html>

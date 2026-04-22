@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nuestro Equipo — JITA</title>
+<meta name="description" content="Conoce a los líderes y misioneros de Jesus Is The Answer LLC." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh;">
+<div id="jita-navbar"></div>
+<main style="flex:1;">
+
+  <section style="background:linear-gradient(90deg,hsl(var(--primary) / .1),hsl(var(--accent) / .1));padding:5rem 0;">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1rem;text-align:center;" class="animate-fade-in-up">
+      <h1 class="text-4xl md:text-6xl" style="font-weight:700;margin:0 0 1.25rem;" data-i18n="team.title"></h1>
+      <p class="text-xl" style="color:hsl(var(--muted-foreground));max-width:48rem;margin:0 auto;" data-i18n="team.subtitle"></p>
+    </div>
+  </section>
+
+  <section style="padding:4rem 0;" class="reveal">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <h2 class="text-3xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="team.leadership"></h2>
+        <p style="color:hsl(var(--muted-foreground));max-width:42rem;margin:0 auto;" data-i18n="team.leadership.description"></p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2" style="gap:2rem;max-width:64rem;margin:0 auto;" id="leaders-grid"></div>
+    </div>
+  </section>
+
+  <section style="padding:4rem 0;background:hsl(var(--muted) / .3);" class="reveal">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <h2 class="text-3xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="team.missionaries"></h2>
+        <p style="color:hsl(var(--muted-foreground));max-width:42rem;margin:0 auto;" data-i18n="team.missionaries.description"></p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style="gap:1.5rem;" id="missionaries-grid"></div>
+    </div>
+  </section>
+
+  <section style="padding:4rem 0;" class="reveal">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+      <div style="background:linear-gradient(90deg,hsl(var(--primary) / .1),hsl(var(--accent) / .1));border-radius:1rem;padding:3rem;">
+        <div style="text-align:center;margin-bottom:2rem;">
+          <h2 class="text-3xl" style="font-weight:700;margin:0 0 .75rem;" data-i18n="team.impact.title"></h2>
+          <p style="color:hsl(var(--muted-foreground));margin:0;" data-i18n="team.impact.subtitle"></p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4" style="gap:1.5rem;" id="impact-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:4rem 0;background:hsl(var(--muted) / .3);" class="reveal">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1rem;text-align:center;">
+      <h2 class="text-3xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="team.cta.title"></h2>
+      <p style="color:hsl(var(--muted-foreground));margin:0 auto 2rem;max-width:42rem;" data-i18n="team.cta.subtitle"></p>
+      <div class="flex" style="gap:1rem;justify-content:center;flex-direction:column;" id="team-cta-row">
+        <button class="btn btn-primary btn-lg" data-i18n="team.cta.join" id="team-join"></button>
+        <button class="btn btn-outline btn-lg" data-i18n="team.cta.contact"></button>
+      </div>
+    </div>
+  </section>
+
+</main>
+<div id="jita-footer"></div>
+
+<script src="translations.js"></script>
+<script src="script.js"></script>
+<script src="application-form.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const leaders = [
+    { name: 'Pastor Juan Martínez', role: 'Director General y Fundador', location: 'Liderazgo Ministerial', experience: '15 años', specialties: ['Liderazgo','Evangelismo','Pastoral'], bio: 'Fundador de JITA con pasión por llevar el evangelio a los más necesitados.', missions: 45 },
+    { name: 'María Elena de Martínez', role: 'Co-Directora y Coordinadora General', location: 'Ministerio Familiar', experience: '12 años', specialties: ['Ministerio Femenino','Coordinación'], bio: 'Co-fundadora y pilar fundamental del ministerio.', missions: 38 },
+  ];
+  const missionaries = [
+    { name: 'David Hernández', role: 'Misionero de Campo', location: 'Honduras', specialties: ['Evangelismo','Trabajo Juvenil'], missions: 24 },
+    { name: 'Sarah Johnson', role: 'Misionera Médica', location: 'Nicaragua', specialties: ['Enfermería','Salud Materno-Infantil'], missions: 22 },
+    { name: 'Luis Ramírez', role: 'Constructor Misionero', location: 'El Salvador', specialties: ['Construcción','Capacitación'], missions: 19 },
+    { name: 'Rebecca Smith', role: 'Misionera Educativa', location: 'Costa Rica', specialties: ['Educación','Alfabetización'], missions: 16 },
+    { name: 'Miguel Ángel López', role: 'Misionero de Apoyo', location: 'Panamá', specialties: ['Logística','Coordinación'], missions: 15 },
+    { name: 'Grace Williams', role: 'Misionera Social', location: 'Belice', specialties: ['Trabajo Social','Desarrollo'], missions: 13 },
+  ];
+
+  function card(m) {
+    return `
+      <div class="jita-card hover-lift" style="overflow:hidden;">
+        <div style="position:relative;">
+          <div style="height:14rem;background:linear-gradient(135deg,hsl(var(--primary) / .2),hsl(var(--accent) / .2));display:flex;align-items:center;justify-content:center;font-size:3rem;color:hsl(var(--primary) / .6);">${JITA.icon('users')}</div>
+          <span class="badge" style="position:absolute;top:1rem;right:1rem;background:hsl(var(--primary) / .9);">${m.missions} <span data-i18n="team.missions.count"></span></span>
+        </div>
+        <div style="padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;">
+          <div>
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;margin:0;">${m.name}</h3>
+            <p style="color:hsl(var(--primary));font-weight:500;margin:.15rem 0 0;">${m.role}</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:.5rem;color:hsl(var(--muted-foreground));font-size:.875rem;">${JITA.icon('mapPin')} <span>${m.location}</span></div>
+          ${m.experience ? `<div style="display:flex;align-items:center;gap:.5rem;color:hsl(var(--muted-foreground));font-size:.875rem;">${JITA.icon('calendar')} <span>${m.experience} <span data-i18n="team.experience"></span></span></div>` : ''}
+          <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
+            ${m.specialties.map(s => `<span class="badge badge-outline" style="font-size:.7rem;">${s}</span>`).join('')}
+          </div>
+          ${m.bio ? `<p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0;">${m.bio}</p>` : ''}
+        </div>
+      </div>`;
+  }
+
+  document.getElementById('leaders-grid').innerHTML = leaders.map(card).join('');
+  document.getElementById('missionaries-grid').innerHTML = missionaries.map(card).join('');
+
+  const stats = [
+    ['award', '2', 'team.impact.founders'],
+    ['mapPin', '50+', 'team.impact.missionaries'],
+    ['calendar', '300+', 'team.impact.experience'],
+    ['users', '1000+', 'team.impact.missions'],
+  ];
+  document.getElementById('impact-grid').innerHTML = stats.map(([i,n,k]) => `
+    <div style="text-align:center;">
+      <div style="display:flex;align-items:center;justify-content:center;width:4rem;height:4rem;background:hsl(var(--primary) / .2);border-radius:50%;margin:0 auto 1rem;font-size:1.6rem;color:hsl(var(--primary));">${JITA.icon(i)}</div>
+      <div style="font-size:1.875rem;font-weight:700;margin-bottom:.35rem;">${n}</div>
+      <div style="font-size:.875rem;color:hsl(var(--muted-foreground));" data-i18n="${k}"></div>
+    </div>`).join('');
+
+  JITA.applyTranslations();
+  document.addEventListener('jita:lang-changed', () => JITA.applyTranslations());
+
+  const mq = window.matchMedia('(min-width:640px)');
+  const upd = () => document.getElementById('team-cta-row').style.flexDirection = mq.matches ? 'row' : 'column';
+  upd(); mq.addEventListener('change', upd);
+
+  document.getElementById('team-join').addEventListener('click', () => JITA.openApplicationForm());
+});
+</script>
+</body>
+</html>

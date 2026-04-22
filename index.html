@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jesus Is The Answer — Inicio</title>
+  <meta name="description"
+    content="JITA: misiones que llevan la palabra de Dios y ayuda práctica a comunidades alrededor del mundo." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="shortcut icon" href="/assets/images/logo/logo.png" type="image/x-icon">
+</head>
+
+<body style="display:flex;flex-direction:column;min-height:100vh;">
+  <div id="jita-navbar"></div>
+
+  <main style="flex:1;">
+    <!-- Hero -->
+    <section
+      style="position:relative;background:linear-gradient(135deg,hsl(var(--primary) / .2),hsl(var(--background)),hsl(var(--accent) / .2));padding:5rem 0;overflow:hidden;">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+        <div class="grid grid-cols-1 lg:grid-cols-2" style="gap:3rem;align-items:center;">
+          <div class="animate-fade-in-up" style="display:flex;flex-direction:column;gap:2rem;">
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+              <h1 class="text-4xl md:text-6xl" style="font-weight:700;line-height:1.1;margin:0;">
+                <span data-i18n="index.hero.title1"></span>
+                <span class="text-primary-color" data-i18n="index.hero.title2"></span>
+              </h1>
+              <p class="text-xl" style="color:hsl(var(--muted-foreground));max-width:30rem;"
+                data-i18n="index.hero.subtitle"></p>
+            </div>
+            <div class="flex" style="gap:1rem;flex-direction:column;" id="hero-cta">
+              <a href="misiones.html" class="btn btn-primary btn-lg hover-scale">
+                <span data-i18n="index.hero.cta.missions"></span>
+                <span style="display:inline-flex;" id="cta-arrow"></span>
+              </a>
+              <button class="btn btn-outline btn-lg hover-scale" id="btn-watch-video">
+                <span id="play-icon"></span>
+                <span data-i18n="index.hero.cta.video"></span>
+              </button>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4" style="gap:1rem;padding-top:2rem;" id="stats-grid"></div>
+          </div>
+          <div style="position:relative;" class="animate-fade-in delay-200">
+            <div class="jita-card" style="position:relative;z-index:2;padding:2rem;">
+              <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+                <img src="/assets/images/logo/logo.png" alt="JITA Logo" style="height:3rem;width:3rem;" />
+                <div>
+                  <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;margin:0;">JITA</h3>
+                  <p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0;">Jesus Is The Answer</p>
+                </div>
+              </div>
+              <p style="color:hsl(var(--muted-foreground));margin-bottom:1.5rem;" data-i18n="index.hero.quote"></p>
+              <p style="font-size:.875rem;color:hsl(var(--muted-foreground));text-align:right;margin:0;"
+                data-i18n="index.hero.quote.ref"></p>
+            </div>
+            <div
+              style="position:absolute;inset:0;background:linear-gradient(135deg,hsl(var(--primary) / .1),hsl(var(--accent) / .1));border-radius:1rem;transform:rotate(3deg);">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next Mission -->
+    <section class="reveal"
+      style="padding:3rem 0;background:linear-gradient(135deg,hsl(var(--primary) / .2),hsl(var(--primary) / .1),hsl(var(--accent) / .2));">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+        <div class="jita-card" style="border:2px solid hsl(var(--primary) / .25);overflow:hidden;">
+          <div style="padding:2.5rem;">
+            <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap;">
+              <span class="badge" data-i18n="index.nextMission.badge"></span>
+              <span class="badge badge-outline">26-29 Junio 2026</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl" style="font-weight:700;margin:0 0 1rem;">Campamento Juvenil 2026: His Name
+              Is Jesus
+            </h2>
+            <div
+              style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.5rem;color:hsl(var(--muted-foreground));">
+              <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:1.05rem;"><span
+                  class="text-primary-color" id="nm-pin"></span>Lima, Perú</span>
+              <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:1.05rem;"><span
+                  class="text-primary-color" id="nm-users"></span>100 <span
+                  data-i18n="index.nextMission.participants"></span></span>
+            </div>
+            <p style="font-size:1.05rem;color:hsl(var(--muted-foreground));margin-bottom:1.5rem;max-width:48rem;"
+              data-i18n="index.services.subtitle"></p>
+            <div
+              style="background:hsl(var(--primary) / .05);border:1px solid hsl(var(--primary) / .2);padding:1rem;border-radius:.5rem;margin-bottom:1.5rem;max-width:48rem;">
+              <h4
+                style="display:inline-flex;align-items:center;gap:.5rem;font-weight:600;margin:0 0 .35rem;font-family:Inter,sans-serif;">
+                <span class="text-primary-color" id="nm-heart"></span>
+                <span data-i18n="index.nextMission.impactGoal"></span>
+              </h4>
+              <p style="margin:0;color:hsl(var(--muted-foreground));">El campamento busca evangelizar y discipular a
+                adolescentes, ayudándolos a conocer su identidad en Cristo a través del Espíritu Santo, en un ambiente
+                seguro donde experimenten el amor de Dios, con el objetivo de ver vidas transformadas mediante un equipo
+                de líderes comprometidos.<br><br>¡INSCRÍBETE AQUÍ!</p>
+            </div>
+            <div class="flex" style="gap:1rem;flex-direction:column;" id="nm-actions">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLScVPwZIPqaNtOSnuwDrpH8c-cBy1HGWR4ic8pozLDqbkO1i_A/viewform"
+                target="_blank" class="btn btn-primary btn-lg" data-i18n="index.nextMission.apply"></a>
+              <a class="btn btn-outline btn-lg"
+                href="https://drive.google.com/file/d/1annHJndhBAz5iQzEULksGEhFaMN6Gym5/view" target="_blank"
+                data-i18n="index.nextMission.details"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="reveal" style="padding:4rem 0;background:hsl(var(--muted) / .3);">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+        <div style="text-align:center;margin-bottom:3rem;">
+          <h2 class="text-3xl md:text-4xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="index.services.title">
+          </h2>
+          <p style="color:hsl(var(--muted-foreground));max-width:42rem;margin:0 auto;"
+            data-i18n="index.services.subtitle"></p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3" style="gap:2rem;" id="services-grid"></div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal" style="padding:4rem 0;">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+        <div
+          style="background:linear-gradient(90deg,hsl(var(--primary) / .1),hsl(var(--accent) / .1));border-radius:1rem;padding:3rem;text-align:center;">
+          <h2 class="text-3xl md:text-4xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="index.cta.title"></h2>
+          <p style="color:hsl(var(--muted-foreground));margin:0 auto 2rem;max-width:42rem;"
+            data-i18n="index.cta.subtitle"></p>
+          <div class="flex" style="gap:1rem;flex-direction:column;justify-content:center;align-items:center;"
+            id="cta-buttons">
+            <a class="btn btn-primary btn-lg" href="quienes-somos.html" data-i18n="index.cta.about"></a>
+            <a class="btn btn-outline btn-lg" href="tienda.html" data-i18n="index.cta.support"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Missions -->
+    <section class="reveal" style="padding:4rem 0;background:hsl(var(--muted) / .3);">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+        <div style="text-align:center;margin-bottom:3rem;">
+          <h2 class="text-3xl md:text-4xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="index.recent.title"></h2>
+          <p style="color:hsl(var(--muted-foreground));max-width:42rem;margin:0 auto;"
+            data-i18n="index.recent.subtitle"></p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style="gap:2rem;" id="recent-grid"></div>
+        <div style="text-align:center;margin-top:2rem;">
+          <a class="btn btn-primary" href="misiones.html">
+            <span data-i18n="index.recent.viewAll"></span>
+            <span id="va-arrow"></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="jita-footer"></div>
+
+  <script src="translations.js"></script>
+  <script src="script.js"></script>
+  <script src="application-form.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Inject icons
+      document.getElementById('cta-arrow').innerHTML = JITA.icon('arrowRight');
+      document.getElementById('play-icon').innerHTML = JITA.icon('play');
+      document.getElementById('nm-pin').innerHTML = JITA.icon('mapPin');
+      document.getElementById('nm-users').innerHTML = JITA.icon('users');
+      document.getElementById('nm-heart').innerHTML = JITA.icon('heart');
+      document.getElementById('va-arrow').innerHTML = JITA.icon('arrowRight');
+
+      // Stats
+      const statKeys = [
+        ['25+', 'index.stats.countries'],
+        ['10,000+', 'index.stats.lives'],
+        ['150+', 'index.stats.missions'],
+        ['500+', 'index.stats.volunteers'],
+      ];
+      const sg = document.getElementById('stats-grid');
+      sg.innerHTML = statKeys.map(([n, k]) => `
+    <div style="text-align:center;">
+      <div style="font-size:1.75rem;font-weight:700;color:hsl(var(--primary));">${n}</div>
+      <div style="font-size:.875rem;color:hsl(var(--muted-foreground));" data-i18n="${k}"></div>
+    </div>`).join('');
+
+      // Services
+      const services = [
+        ['heart', 'index.services.evangelism.title', 'index.services.evangelism.desc'],
+        ['users', 'index.services.food.title', 'index.services.food.desc'],
+        ['globe', 'index.services.blessings.title', 'index.services.blessings.desc'],
+      ];
+      document.getElementById('services-grid').innerHTML = services.map(([icon, t, d]) => `
+    <div class="jita-card hover-lift" style="text-align:center;padding:1.5rem;">
+      <div style="width:4rem;height:4rem;border-radius:50%;background:hsl(var(--primary) / .2);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.75rem;color:hsl(var(--primary));">${JITA.icon(icon)}</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin:0 0 .5rem;" data-i18n="${t}"></h3>
+      <p style="font-size:.95rem;color:hsl(var(--muted-foreground));margin:0;" data-i18n="${d}"></p>
+    </div>`).join('');
+
+      // Recent missions cards
+      const recentMissions = [
+        { title: 'index.recent.mission1.title', desc: 'index.recent.mission1.desc', image: 'https://i.ibb.co/C3sCRPhb/mission2023-2.webp' },
+        { title: 'index.recent.mission2.title', desc: 'index.recent.mission2.desc', image: 'https://i.ibb.co/MyYF9JVV/mission2022-9.webp' },
+        { title: 'index.recent.mission3.title', desc: 'index.recent.mission3.desc', image: 'https://i.ibb.co/Fkh69J9d/mission2021-4.webp' }
+      ];
+      document.getElementById('recent-grid').innerHTML = recentMissions.map(m => `
+    <div class="jita-card hover-lift" style="overflow:hidden;">
+      <div style="height:12rem;background:hsl(var(--muted));overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;">
+        <img src="${m.image}" alt="" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;display:${m.image && m.image !== 'TU_LINK_AQUI' ? 'block' : 'none'};" onerror="this.style.display='none'">
+        <div style="font-size:3rem;color:hsl(var(--primary) / .3);">${JITA.icon('heart')}</div>
+      </div>
+      <div style="padding:1.25rem;">
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;margin:0 0 .5rem;" data-i18n="${m.title}"></h3>
+        <p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0 0 1rem;" data-i18n="${m.desc}"></p>
+        <a href="misiones.html" class="btn btn-outline btn-sm" style="width:100%;" data-i18n="index.recent.readMore"></a>
+      </div>
+    </div>`).join('');
+
+      // Re-translate dynamic blocks
+      JITA.applyTranslations();
+      document.addEventListener('jita:lang-changed', () => JITA.applyTranslations());
+
+      // CTAs row direction (mimic sm:flex-row)
+      const apply = window.matchMedia('(min-width:640px)');
+      const upd = () => {
+        document.querySelectorAll('#hero-cta, #nm-actions, #cta-buttons').forEach(el => {
+          el.style.flexDirection = apply.matches ? 'row' : 'column';
+        });
+      };
+      upd(); apply.addEventListener('change', upd);
+
+      // Hero video button
+      document.getElementById('btn-watch-video').addEventListener('click', () => {
+        JITA.modal(`<h3 style="font-family:'Playfair Display',serif;margin:0 0 1rem;">Video</h3>
+      <iframe style="aspect-ratio:16/9;background:#000;border-radius:.5rem;display:flex;align-items:center;justify-content:center;color:#fff;" src="https://www.youtube.com/embed/0DDFRJcaITk?si=NQelqlWy_7gKZBNS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`);
+      });
+
+      // Apply mission button -> form modal
+      document.getElementById('btn-apply-nextmission').addEventListener('click', () => {
+        JITA.openApplicationForm('Misión Pan de Vida en Colombia');
+      });
+    });
+  </script>
+</body>
+
+</html>

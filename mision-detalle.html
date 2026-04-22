@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Detalle de Misión — JITA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh;">
+<div id="jita-navbar"></div>
+<main style="flex:1;" id="detail-root"></main>
+<div id="jita-footer"></div>
+
+<script src="translations.js"></script>
+<script src="script.js"></script>
+<script src="application-form.js"></script>
+<script src="missions-data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const id = parseInt(new URLSearchParams(location.search).get('id') || '0', 10);
+  const m = JITA_MISSIONS.find(x => x.id === id);
+  const root = document.getElementById('detail-root');
+
+  if (!m) {
+    root.innerHTML = `<div style="min-height:60vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;">
+      <h1 class="text-2xl" style="font-weight:700;margin:0;" data-i18n="missionDetail.notFound">Misión no encontrada</h1>
+      <a class="btn btn-primary" href="misiones.html">Volver a Misiones</a>
+    </div>`;
+    JITA.applyTranslations();
+    return;
+  }
+
+  root.innerHTML = `
+    <section style="background:linear-gradient(90deg,hsl(var(--primary) / .1),hsl(var(--accent) / .1));padding:3rem 0;">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+        <div style="margin-bottom:1.25rem;">
+          <a class="btn btn-ghost" href="misiones.html" style="padding-left:0;">${JITA.icon('arrowLeft')} Volver a Misiones</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;">
+          <span class="${m.status === 'completada' ? 'badge' : 'badge badge-secondary'}">${m.status === 'completada' ? 'Completada' : 'Planificada'}</span>
+          <span class="badge badge-outline">${m.category.charAt(0).toUpperCase()+m.category.slice(1)}</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl" style="font-weight:700;margin:0 0 1rem;">${m.title}</h1>
+        <div style="display:flex;flex-wrap:wrap;gap:1.5rem;color:hsl(var(--muted-foreground));font-size:.95rem;">
+          <span style="display:inline-flex;align-items:center;gap:.4rem;">${JITA.icon('mapPin')} ${m.location}</span>
+          <span style="display:inline-flex;align-items:center;gap:.4rem;">${JITA.icon('calendar')} ${m.date}</span>
+          <span style="display:inline-flex;align-items:center;gap:.4rem;">${JITA.icon('users')} ${m.participants} participantes</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:4rem 0;">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;display:grid;grid-template-columns:1fr;gap:2rem;" id="detail-grid">
+        <div style="display:flex;flex-direction:column;gap:1.5rem;">
+          <div class="jita-card" style="padding:1.5rem;">
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;margin:0 0 1rem;font-size:1.25rem;">Descripción Detallada</h3>
+            <p style="color:hsl(var(--muted-foreground));white-space:pre-line;margin:0;">${m.detailedDescription || m.description}</p>
+          </div>
+          ${m.objectives ? `
+          <div class="jita-card" style="padding:1.5rem;">
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;margin:0 0 1rem;font-size:1.25rem;display:flex;align-items:center;gap:.5rem;">${JITA.icon('target')} Objetivos</h3>
+            <ul style="margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:.5rem;">
+              ${m.objectives.map(o => `<li style="display:flex;gap:.5rem;color:hsl(var(--muted-foreground));"><span class="text-primary-color">${JITA.icon('target')}</span>${o}</li>`).join('')}
+            </ul>
+          </div>` : ''}
+          ${m.achievements ? `
+          <div class="jita-card" style="padding:1.5rem;">
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;margin:0 0 1rem;font-size:1.25rem;">Logros Alcanzados</h3>
+            <ul style="margin:0;padding-left:1.1rem;color:hsl(var(--muted-foreground));display:flex;flex-direction:column;gap:.4rem;">
+              ${m.achievements.map(a => `<li>${a}</li>`).join('')}
+            </ul>
+          </div>` : ''}
+        </div>
+        <aside style="display:flex;flex-direction:column;gap:1.5rem;">
+          <div class="jita-card" style="padding:1.5rem;">
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;margin:0 0 1rem;">Información General</h3>
+            <div style="display:flex;flex-direction:column;gap:.85rem;font-size:.9rem;">
+              <div><strong>Impacto:</strong><br><span style="color:hsl(var(--muted-foreground));">${m.impact}</span></div>
+              <div><strong>Estado:</strong> <span class="${m.status === 'completada' ? 'badge' : 'badge badge-secondary'}">${m.status === 'completada' ? 'Completada' : 'Planificada'}</span></div>
+              <div><strong>Categoría:</strong> <span class="badge badge-outline">${m.category}</span></div>
+            </div>
+          </div>
+          ${m.team ? `
+          <div class="jita-card" style="padding:1.5rem;">
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;margin:0 0 1rem;">Equipo de Liderazgo</h3>
+            <div style="display:flex;flex-direction:column;gap:.75rem;">
+              ${m.team.map(p => `<div style="display:flex;align-items:center;gap:.75rem;">
+                <div style="width:2.5rem;height:2.5rem;border-radius:50%;background:linear-gradient(135deg,hsl(var(--primary) / .2),hsl(var(--accent) / .2));display:flex;align-items:center;justify-content:center;color:hsl(var(--primary));">${JITA.icon('users')}</div>
+                <div><div style="font-weight:600;">${p.name}</div><div style="font-size:.8rem;color:hsl(var(--muted-foreground));">${p.role}</div></div>
+              </div>`).join('')}
+            </div>
+          </div>` : ''}
+          <div class="jita-card" style="padding:1.5rem;background:linear-gradient(135deg,hsl(var(--primary) / .08),hsl(var(--accent) / .08));">
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;margin:0 0 .5rem;">¿Quieres Apoyar?</h3>
+            <p style="color:hsl(var(--muted-foreground));font-size:.9rem;margin:0 0 1rem;">Tu contribución nos permite llevar la palabra de Dios y ayuda práctica a más comunidades.</p>
+            <button class="btn btn-primary" style="width:100%;margin-bottom:.5rem;">Hacer una Donación</button>
+            <button class="btn btn-outline" style="width:100%;" id="md-apply">Aplicar para una Misión</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+  `;
+
+  const mq = window.matchMedia('(min-width:1024px)');
+  const upd = () => {
+    document.getElementById('detail-grid').style.gridTemplateColumns = mq.matches ? '2fr 1fr' : '1fr';
+  };
+  upd(); mq.addEventListener('change', upd);
+
+  document.getElementById('md-apply').addEventListener('click', () => JITA.openApplicationForm(m.title));
+  JITA.applyTranslations();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Misiones — JITA</title>
+<meta name="description" content="Listado de misiones JITA: completadas y planificadas." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh;">
+<div id="jita-navbar"></div>
+<main style="flex:1;">
+
+  <section style="background:linear-gradient(90deg,hsl(var(--primary) / .1),hsl(var(--accent) / .1));padding:5rem 0;">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1rem;text-align:center;" class="animate-fade-in-up">
+      <h1 class="text-4xl md:text-6xl" style="font-weight:700;margin:0 0 1.25rem;" data-i18n="missions.title"></h1>
+      <p class="text-xl" style="color:hsl(var(--muted-foreground));max-width:48rem;margin:0 auto;" data-i18n="missions.subtitle"></p>
+    </div>
+  </section>
+
+  <section style="padding:3rem 0;background:linear-gradient(135deg,hsl(var(--primary) / .2),hsl(var(--primary) / .1),hsl(var(--accent) / .2));" class="reveal" id="next-mission-section"></section>
+
+  <section style="padding:2rem 0;background:hsl(var(--muted) / .3);">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;color:hsl(var(--muted-foreground));font-size:.875rem;font-weight:500;">
+        <span id="filter-icon"></span><span data-i18n="missions.filter"></span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem;" id="filter-buttons"></div>
+    </div>
+  </section>
+
+  <section style="padding:4rem 0;" class="reveal">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style="gap:2rem;" id="missions-grid"></div>
+    </div>
+  </section>
+
+  <section style="padding:4rem 0;background:hsl(var(--primary) / .05);" class="reveal">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1rem;text-align:center;">
+      <h2 class="text-3xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="missions.cta.title"></h2>
+      <p style="color:hsl(var(--muted-foreground));margin:0 auto 2rem;max-width:42rem;" data-i18n="missions.cta.subtitle"></p>
+      <div class="flex" style="gap:1rem;justify-content:center;flex-direction:column;" id="missions-cta-row">
+        <button class="btn btn-primary btn-lg" id="m-apply" data-i18n="missions.cta.apply"></button>
+        <button class="btn btn-outline btn-lg" data-i18n="missions.cta.donate"></button>
+      </div>
+    </div>
+  </section>
+
+</main>
+<div id="jita-footer"></div>
+
+<script src="translations.js"></script>
+<script src="script.js"></script>
+<script src="application-form.js"></script>
+<script src="missions-data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('filter-icon').innerHTML = JITA.icon('target');
+  let activeFilter = 'todos';
+
+  const countries = [
+    { id: 'todos', name: () => JITA.t('missions.allCountries') },
+    { id: 'guatemala', name: () => 'Guatemala' },
+    { id: 'honduras',  name: () => 'Honduras' },
+    { id: 'colombia',  name: () => 'Colombia' },
+    { id: 'peru',      name: () => 'Perú' },
+  ];
+
+  function renderFilter() {
+    document.getElementById('filter-buttons').innerHTML = countries.map(c => `
+      <button class="btn ${activeFilter === c.id ? 'btn-primary' : 'btn-outline'} btn-sm" data-filter="${c.id}">${c.name()}</button>
+    `).join('');
+    document.querySelectorAll('[data-filter]').forEach(b => b.addEventListener('click', () => {
+      activeFilter = b.dataset.filter; renderFilter(); renderGrid();
+    }));
+  }
+
+  function statusBadge(status) {
+    const cls = status === 'completada' ? 'badge' : 'badge badge-secondary';
+    const k = status === 'completada' ? 'missions.completed' : 'missions.planned';
+    return `<span class="${cls}" data-i18n="${k}"></span>`;
+  }
+
+  function missionCard(m) {
+    return `
+      <div class="jita-card hover-lift" style="overflow:hidden;">
+        <div style="position:relative;">
+          <div style="height:12rem;background:linear-gradient(135deg,hsl(var(--primary) / .2),hsl(var(--accent) / .2));display:flex;align-items:center;justify-content:center;font-size:3rem;color:hsl(var(--primary) / .6);">${JITA.icon('heart')}</div>
+          <div style="position:absolute;top:1rem;right:1rem;">${statusBadge(m.status)}</div>
+        </div>
+        <div style="padding:1.25rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;margin:0 0 .85rem;">${m.title}</h3>
+          <div style="display:flex;flex-direction:column;gap:.4rem;font-size:.875rem;color:hsl(var(--muted-foreground));margin-bottom:.85rem;">
+            <span style="display:flex;align-items:center;gap:.5rem;">${JITA.icon('mapPin')} ${m.location}</span>
+            <span style="display:flex;align-items:center;gap:.5rem;">${JITA.icon('calendar')} ${m.date}</span>
+            <span style="display:flex;align-items:center;gap:.5rem;">${JITA.icon('users')} ${m.participants} <span data-i18n="missions.participants"></span></span>
+          </div>
+          <p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0 0 1rem;">${m.description}</p>
+          <div style="background:hsl(var(--muted) / .5);padding:.75rem;border-radius:.5rem;margin-bottom:1rem;">
+            <h4 style="font-size:.875rem;font-weight:600;margin:0 0 .25rem;font-family:Inter,sans-serif;" data-i18n="missions.impact"></h4>
+            <p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0;">${m.impact}</p>
+          </div>
+          <a class="btn btn-outline" style="width:100%;" href="mision-detalle.html?id=${m.id}" data-i18n="missions.viewDetails"></a>
+        </div>
+      </div>`;
+  }
+
+  function renderGrid() {
+    const data = activeFilter === 'todos' ? JITA_MISSIONS : JITA_MISSIONS.filter(x => x.country === activeFilter);
+    document.getElementById('missions-grid').innerHTML = data.map(missionCard).join('');
+    JITA.applyTranslations();
+  }
+
+  function renderNextMission() {
+    const next = JITA_MISSIONS.find(m => m.status === 'planificada');
+    const host = document.getElementById('next-mission-section');
+    if (!next) { host.style.display = 'none'; return; }
+    host.innerHTML = `
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+        <div class="jita-card" style="border:2px solid hsl(var(--primary) / .25);overflow:hidden;">
+          <div style="padding:2.5rem;">
+            <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap;">
+              <span class="badge" data-i18n="missions.nextBadge"></span>
+              <span class="badge badge-outline">${next.date}</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl" style="font-weight:700;margin:0 0 1rem;">${next.title}</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.5rem;color:hsl(var(--muted-foreground));">
+              <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:1.05rem;"><span class="text-primary-color">${JITA.icon('mapPin')}</span>${next.location}</span>
+              <span style="display:inline-flex;align-items:center;gap:.5rem;font-size:1.05rem;"><span class="text-primary-color">${JITA.icon('users')}</span>${next.participants} <span data-i18n="missions.participants"></span></span>
+            </div>
+            <p style="font-size:1.05rem;color:hsl(var(--muted-foreground));margin:0 0 1.5rem;max-width:48rem;">${next.description}</p>
+            <div style="background:hsl(var(--primary) / .05);border:1px solid hsl(var(--primary) / .2);padding:1rem;border-radius:.5rem;margin-bottom:1.5rem;max-width:48rem;">
+              <h4 style="display:inline-flex;align-items:center;gap:.5rem;font-weight:600;margin:0 0 .25rem;font-family:Inter,sans-serif;">${JITA.icon('heart')} <span data-i18n="missions.impactGoal"></span></h4>
+              <p style="margin:0;color:hsl(var(--muted-foreground));">${next.impact}</p>
+            </div>
+            <div class="flex" style="gap:1rem;flex-direction:column;" id="nm-actions">
+              <button class="btn btn-primary btn-lg" id="nm-apply" data-i18n="missions.apply"></button>
+              <a class="btn btn-outline btn-lg" href="mision-detalle.html?id=${next.id}" data-i18n="missions.details"></a>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    JITA.applyTranslations();
+    document.getElementById('nm-apply').addEventListener('click', () => JITA.openApplicationForm(next.title));
+    const mq = window.matchMedia('(min-width:640px)');
+    const upd = () => document.getElementById('nm-actions').style.flexDirection = mq.matches ? 'row' : 'column';
+    upd(); mq.addEventListener('change', upd);
+  }
+
+  renderFilter();
+  renderGrid();
+  renderNextMission();
+
+  const mq = window.matchMedia('(min-width:640px)');
+  const upd = () => document.getElementById('missions-cta-row').style.flexDirection = mq.matches ? 'row' : 'column';
+  upd(); mq.addEventListener('change', upd);
+
+  document.getElementById('m-apply').addEventListener('click', () => JITA.openApplicationForm());
+
+  document.addEventListener('jita:lang-changed', () => { renderFilter(); renderGrid(); renderNextMission(); });
+});
+</script>
+</body>
+</html>

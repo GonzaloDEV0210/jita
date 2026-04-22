@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiénes Somos — JITA</title>
+  <meta name="description" content="Conoce la historia, visión, misión y valores de Jesus Is The Answer LLC." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body style="display:flex;flex-direction:column;min-height:100vh;">
+  <div id="jita-navbar"></div>
+  <main style="flex:1;">
+
+    <section style="background:linear-gradient(90deg,hsl(var(--primary) / .1),hsl(var(--accent) / .1));padding:5rem 0;">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;text-align:center;" class="animate-fade-in-up">
+        <h1 class="text-4xl md:text-6xl" style="font-weight:700;margin:0 0 1.25rem;" data-i18n="about.title"></h1>
+        <p class="text-xl" style="color:hsl(var(--muted-foreground));max-width:48rem;margin:0 auto;"
+          data-i18n="about.subtitle"></p>
+      </div>
+    </section>
+
+    <section style="padding:4rem 0;" class="reveal">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+        <div class="grid grid-cols-1 lg:grid-cols-2" style="gap:3rem;align-items:center;">
+          <div>
+            <h2 class="text-3xl" style="font-weight:700;margin:0 0 1.25rem;" data-i18n="about.history.title"></h2>
+            <p style="color:hsl(var(--muted-foreground));margin:0 0 1rem;" data-i18n="about.history.p1"></p>
+            <p style="color:hsl(var(--muted-foreground));margin:0 0 1rem;" data-i18n="about.history.p2"></p>
+            <p style="color:hsl(var(--muted-foreground));margin:0;" data-i18n="about.history.p3"></p>
+          </div>
+          <div style="background:hsl(var(--muted));border-radius:.5rem;padding:2rem;">
+            <h3 class="text-2xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="about.vision.title"></h3>
+            <p style="color:hsl(var(--muted-foreground));margin:0 0 1.5rem;" data-i18n="about.vision.text"></p>
+            <h3 class="text-2xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="about.mission.title"></h3>
+            <p style="color:hsl(var(--muted-foreground));margin:0;" data-i18n="about.mission.text"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:4rem 0;background:hsl(var(--muted) / .3);" class="reveal">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+        <div style="text-align:center;margin-bottom:3rem;">
+          <h2 class="text-3xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="about.values.title"></h2>
+          <p style="color:hsl(var(--muted-foreground));max-width:42rem;margin:0 auto;"
+            data-i18n="about.values.subtitle"></p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style="gap:1.5rem;" id="values-grid"></div>
+      </div>
+    </section>
+
+    <!-- Pilares Carousel -->
+    <section style="padding:4rem 0;background:linear-gradient(135deg,#fceae0 0%,#fff6f2 50%,#fceae0 100%);"
+      class="reveal">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+        <div style="text-align:center;margin-bottom:3rem;">
+          <h2 class="text-3xl md:text-5xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="pilares.title"></h2>
+          <p class="text-xl" style="color:#737373;max-width:42rem;margin:0 auto;" data-i18n="pilares.subtitle"></p>
+        </div>
+        <div class="carousel" id="pilares-carousel">
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="pilares-track"></div>
+          </div>
+          <button class="carousel-btn carousel-btn-prev" aria-label="Prev"><span id="cprev"></span></button>
+          <button class="carousel-btn carousel-btn-next" aria-label="Next"><span id="cnext"></span></button>
+        </div>
+        <div style="text-align:center;margin-top:1.5rem;display:block;" id="swipe-hint">
+          <p style="color:#737373;font-size:.875rem;margin:0;" data-i18n="pilares.swipe"></p>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:4rem 0;" class="reveal">
+      <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+        <div style="text-align:center;margin-bottom:3rem;">
+          <h2 class="text-3xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="about.team.title"></h2>
+          <p style="color:hsl(var(--muted-foreground));max-width:42rem;margin:0 auto;" data-i18n="about.team.subtitle">
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2" style="gap:2rem;max-width:50rem;margin:0 auto;" id="team-grid">
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <div id="jita-footer"></div>
+
+  <script src="translations.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('cprev').innerHTML = JITA.icon('chevronLeft');
+      document.getElementById('cnext').innerHTML = JITA.icon('chevronRight');
+
+      const values = [
+        ['heart', 'about.values.word.title', 'about.values.word.desc'],
+        ['globe', 'about.values.love.title', 'about.values.love.desc'],
+        ['users', 'about.values.service.title', 'about.values.service.desc'],
+        ['target', 'about.values.christ.title', 'about.values.christ.desc'],
+      ];
+      document.getElementById('values-grid').innerHTML = values.map(([i, t, d]) => `
+    <div class="jita-card hover-lift" style="text-align:center;padding:1.5rem;">
+      <div style="font-size:2.5rem;color:hsl(var(--primary));display:flex;justify-content:center;margin-bottom:1rem;">${JITA.icon(i)}</div>
+      <h3 style="font-weight:600;font-size:1.05rem;margin:0 0 .5rem;font-family:Inter,sans-serif;" data-i18n="${t}"></h3>
+      <p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0;" data-i18n="${d}"></p>
+    </div>
+  `).join('');
+
+      // Pilares
+      const pilarKeys = ['bible', 'trinity', 'jesus', 'salvation', 'cross', 'spirit', 'church', 'return'];
+      function renderPilares() {
+        document.getElementById('pilares-track').innerHTML = pilarKeys.map(k => `
+      <div class="carousel-slide">
+        <div style="height:100%;background:linear-gradient(180deg,#FFFFFF 0%,#fff6f2 100%);border-left:4px solid #D99D7B;border-radius:.5rem;box-shadow:0 10px 24px -10px rgba(0,0,0,.12);padding:1.25rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#D99D7B;margin:0 0 .75rem;">${JITA.t('pilares.' + k + '.title')}</h3>
+          <p style="font-size:.875rem;color:#737373;line-height:1.55;margin:0;">${JITA.t('pilares.' + k + '.desc')}</p>
+        </div>
+      </div>`).join('');
+      }
+      renderPilares();
+      JITA.carousel(document.getElementById('pilares-carousel'));
+      document.addEventListener('jita:lang-changed', () => { renderPilares(); JITA.carousel(document.getElementById('pilares-carousel')); });
+
+      // Hide swipe hint on desktop
+      const mq = window.matchMedia('(min-width:768px)');
+      const updHint = () => { document.getElementById('swipe-hint').style.display = mq.matches ? 'none' : 'block'; };
+      updHint(); mq.addEventListener('change', updHint);
+
+      // Team mock
+      const teamMembers = [
+        { name: 'about.team.member1.name', role: 'about.team.member1.role', bio: 'about.team.member1.bio', img: '/assets/images/team/David Roelofs.jpg' },
+        { name: 'about.team.member2.name', role: 'about.team.member2.role', bio: 'about.team.member2.bio', img: '/assets/images/team/MONICA ROELOFS_ROUND.jpg' }
+      ];
+      document.getElementById('team-grid').innerHTML = teamMembers.map(m => `
+    <div class="jita-card hover-lift" style="padding:1.5rem;text-align:center;">
+      <img src="${m.img}" alt="Líder" style="width:6rem;height:6rem;border-radius:50%;object-fit:cover;margin:0 auto 1rem;background:hsl(var(--primary) / .2);" onerror="this.onerror=null; this.outerHTML='<div style=\\'width:6rem;height:6rem;background:hsl(var(--primary) / .2);border-radius:50%;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:hsl(var(--primary));\\'>👤</div>';"/>
+      <h3 style="font-weight:600;font-size:1.05rem;margin:0 0 .5rem;font-family:Inter,sans-serif;" data-i18n="${m.name}"></h3>
+      <p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0 0 1rem;" data-i18n="${m.role}"></p>
+      <p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0;" data-i18n="${m.bio}"></p>
+    </div>`).join('');
+
+      JITA.applyTranslations();
+    });
+  </script>
+</body>
+
+</html>
