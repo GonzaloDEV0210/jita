@@ -16,8 +16,8 @@
     localStorage.setItem(STORAGE_KEY, lang);
     applyTranslations();
     document.documentElement.lang = lang;
-    document.querySelectorAll('select.lang-select').forEach(s => s.value = lang);
     // Re-render dynamic blocks that depend on language
+    renderNavbar(); // Re-render navbar to update custom dropdown labels
     document.dispatchEvent(new CustomEvent('jita:lang-changed', { detail: { lang } }));
   }
   function t(key) {
@@ -64,6 +64,7 @@
     cart: '<svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>',
     chevronLeft: '<svg class="icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>',
     chevronRight: '<svg class="icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>',
+    info: '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
   };
   window.JITA.icon = (name) => ICONS[name] || '';
 
@@ -72,25 +73,51 @@
     { key: 'nav.home', href: 'index.html', match: ['index.html', ''] },
     { key: 'nav.about', href: 'quienes-somos.html', match: ['quienes-somos.html'] },
     { key: 'nav.team', href: 'equipo.html', match: ['equipo.html'] },
-    { key: 'nav.missions', href: 'misiones.html', match: ['misiones.html', 'mision-detalle.html'] },
+    { key: 'nav.missions', href: 'misiones.html', match: ['misiones.html', 'peru-2021.html', 'peru-2022.html', 'peru-2023.html', 'campamento-2026.html'] },
     { key: 'nav.store', href: 'tienda.html', match: ['tienda.html'] },
   ];
 
+  function getRoot() {
+    return location.pathname.includes('/misiones/') ? '../' : '';
+  }
+
   function currentPage() {
-    const p = location.pathname.split('/').pop() || 'index.html';
-    return p;
+    return location.pathname.split('/').pop() || 'index.html';
   }
 
   function renderNavbar() {
     const host = document.getElementById('jita-navbar');
     if (!host) return;
     const here = currentPage();
+    const root = getRoot();
+    const currentLang = getLang();
+
+    function renderLangSelector(isMobile = false) {
+      const labels = { es: 'ES', en: 'EN' };
+      const fullLabels = { es: 'Español', en: 'English' };
+      const currentLabel = isMobile ? fullLabels[currentLang] : labels[currentLang];
+
+      return `
+        <div class="lang-dropdown" id="${isMobile ? 'lang-mobile' : 'lang-desktop'}">
+          <div class="lang-trigger">
+            ${ICONS.globe}
+            <span>${currentLabel}</span>
+            <span style="font-size:0.6rem;opacity:0.6;">▼</span>
+          </div>
+          <div class="lang-menu">
+            <div class="lang-option ${currentLang === 'es' ? 'active' : ''}" data-value="es">Español</div>
+            <div class="lang-option ${currentLang === 'en' ? 'active' : ''}" data-value="en">English</div>
+          </div>
+        </div>
+      `;
+    }
+
     const linksHTML = NAV_ITEMS.map(item => {
       const active = item.match.includes(here);
       const cls = active
         ? 'background:hsl(var(--primary));color:hsl(var(--primary-foreground));'
         : 'color:hsl(var(--muted-foreground));';
-      return `<a href="${item.href}" data-i18n="${item.key}" class="nav-link"
+      return `<a href="${root}${item.href}" data-i18n="${item.key}" class="nav-link"
         style="padding:.5rem .75rem;border-radius:6px;font-size:.875rem;font-weight:500;text-decoration:none;transition:background-color .2s,color .2s;${cls}"></a>`;
     }).join('');
 
@@ -99,7 +126,7 @@
       const cls = active
         ? 'background:hsl(var(--primary));color:hsl(var(--primary-foreground));'
         : 'color:hsl(var(--muted-foreground));';
-      return `<a href="${item.href}" data-i18n="${item.key}"
+      return `<a href="${root}${item.href}" data-i18n="${item.key}"
         style="display:block;padding:.6rem .75rem;border-radius:6px;font-size:1rem;font-weight:500;text-decoration:none;${cls}"></a>`;
     }).join('');
 
@@ -107,19 +134,13 @@
       <nav style="background:hsl(var(--background));border-bottom:1px solid hsl(var(--border));position:sticky;top:0;z-index:50;">
         <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
           <div style="display:flex;justify-content:space-between;align-items:center;height:4rem;">
-            <a href="index.html" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;color:inherit;">
-              <img src="/assets/images/logo/logo.png" alt="JITA Logo" style="height:2.5rem;width:2.5rem;" />
+            <a href="${root}index.html" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;color:inherit;">
+              <img src="${root}assets/images/logo/logo.png" alt="JITA Logo" style="height:2.5rem;width:2.5rem;" />
               <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.125rem;">Jesus Is The Answer</span>
             </a>
-            <div class="desktop-nav" style="display:none;align-items:center;gap:1rem;">
+            <div class="desktop-nav" style="align-items:center;gap:1.5rem;">
               <div style="display:flex;align-items:baseline;gap:.5rem;">${linksHTML}</div>
-              <div style="display:flex;align-items:center;gap:.4rem;color:hsl(var(--muted-foreground));font-size:.85rem;">
-                ${ICONS.globe}
-                <select class="select lang-select" style="width:5rem;height:2rem;padding:0 .35rem;font-size:.75rem;">
-                  <option value="es">ES</option>
-                  <option value="en">EN</option>
-                </select>
-              </div>
+              ${renderLangSelector(false)}
             </div>
             <button class="btn btn-ghost mobile-toggle" aria-label="Menu" style="padding:.4rem;">
               ${ICONS.menu}
@@ -128,51 +149,48 @@
         </div>
         <div class="mobile-menu" style="border-top:1px solid hsl(var(--border));padding:.5rem 1rem 1rem;">
           ${mobileLinks}
-          <div style="display:flex;align-items:center;gap:.4rem;padding:.6rem .75rem;color:hsl(var(--muted-foreground));">
-            ${ICONS.globe}
-            <select class="select lang-select" style="width:5rem;height:2rem;font-size:.75rem;">
-              <option value="es">ES</option>
-              <option value="en">EN</option>
-            </select>
+          <div style="margin-top:1.25rem;padding:0 .75rem;">
+            ${renderLangSelector(true)}
           </div>
         </div>
       </nav>
     `;
 
-    // Responsive desktop nav (CSS-in-JS via media)
-    const mq = window.matchMedia('(min-width: 768px)');
-    const updateMQ = () => {
-      const dn = host.querySelector('.desktop-nav');
-      const mt = host.querySelector('.mobile-toggle');
-      if (mq.matches) { dn.style.display = 'flex'; mt.style.display = 'none'; }
-      else { dn.style.display = 'none'; mt.style.display = 'inline-flex'; }
-    };
-    updateMQ(); mq.addEventListener('change', updateMQ);
+    // Add dropdown logic
+    const setupDropdown = (id) => {
+      const el = host.querySelector(`#${id}`);
+      if (!el) return;
+      const trigger = el.querySelector('.lang-trigger');
+      const menu = el.querySelector('.lang-menu');
+      
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('show');
+      });
 
-    // Mobile toggle
-    const toggle = host.querySelector('.mobile-toggle');
-    const mobile = host.querySelector('.mobile-menu');
-    toggle.addEventListener('click', () => {
-      mobile.classList.toggle('is-open');
-      toggle.innerHTML = mobile.classList.contains('is-open') ? ICONS.x : ICONS.menu;
+      el.querySelectorAll('.lang-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          const val = opt.getAttribute('data-value');
+          setLang(val);
+          menu.classList.remove('show');
+        });
+      });
+    };
+
+    setupDropdown('lang-desktop');
+    setupDropdown('lang-mobile');
+
+    // Close on click outside
+    document.addEventListener('click', () => {
+      host.querySelectorAll('.lang-menu').forEach(m => m.classList.remove('show'));
     });
 
-    // Hover effects on nav links via JS (since no Tailwind)
-    host.querySelectorAll('.nav-link').forEach(a => {
-      a.addEventListener('mouseenter', e => {
-        if (!a.style.background.includes('var(--primary)')) {
-          a.style.background = 'hsl(var(--muted))';
-          a.style.color = 'hsl(var(--foreground))';
-        }
-      });
-      a.addEventListener('mouseleave', e => {
-        const here2 = currentPage();
-        const it = NAV_ITEMS.find(x => x.href === a.getAttribute('href'));
-        if (it && !it.match.includes(here2)) {
-          a.style.background = 'transparent';
-          a.style.color = 'hsl(var(--muted-foreground))';
-        }
-      });
+    // Mobile menu toggle
+    const toggle = host.querySelector('.mobile-toggle');
+    const menu = host.querySelector('.mobile-menu');
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('is-open');
+      toggle.innerHTML = open ? ICONS.x : ICONS.menu;
     });
 
     // Language select binding
@@ -185,13 +203,14 @@
   function renderFooter() {
     const host = document.getElementById('jita-footer');
     if (!host) return;
+    const root = getRoot();
     host.innerHTML = `
       <footer style="background:hsl(var(--muted) / .5);border-top:1px solid hsl(var(--border));margin-top:auto;">
         <div style="max-width:80rem;margin:0 auto;padding:3rem 1rem;">
           <div class="footer-grid" style="display:grid;grid-template-columns:1fr;gap:2rem;">
             <div>
               <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
-                <img src="/assets/images/logo/logo.png" alt="JITA Logo" style="height:2.5rem;width:2.5rem;" />
+                <img src="${root}assets/images/logo/logo.png" alt="JITA Logo" style="height:2.5rem;width:2.5rem;" />
                 <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;">
                   Jesus Is The Answer <span style="color:hsl(var(--muted-foreground));font-weight:400;letter-spacing:.08em;">LLC</span>
                 </span>
@@ -201,11 +220,11 @@
             <div>
               <h3 data-i18n="footer.navigation" style="font-weight:600;margin:0 0 1rem;font-family:Inter,sans-serif;font-size:1rem;"></h3>
               <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem;">
-                <li><a href="index.html" data-i18n="nav.home" class="story-link" style="color:hsl(var(--muted-foreground));font-size:.875rem;text-decoration:none;"></a></li>
-                <li><a href="quienes-somos.html" data-i18n="nav.about" class="story-link" style="color:hsl(var(--muted-foreground));font-size:.875rem;text-decoration:none;"></a></li>
-                <li><a href="equipo.html" data-i18n="nav.team" class="story-link" style="color:hsl(var(--muted-foreground));font-size:.875rem;text-decoration:none;"></a></li>
-                <li><a href="misiones.html" data-i18n="nav.missions" class="story-link" style="color:hsl(var(--muted-foreground));font-size:.875rem;text-decoration:none;"></a></li>
-                <li><a href="tienda.html" data-i18n="nav.store" class="story-link" style="color:hsl(var(--muted-foreground));font-size:.875rem;text-decoration:none;"></a></li>
+                <li><a href="${root}index.html" data-i18n="nav.home" class="story-link" style="color:hsl(var(--muted-foreground));font-size:.875rem;text-decoration:none;"></a></li>
+                <li><a href="${root}quienes-somos.html" data-i18n="nav.about" class="story-link" style="color:hsl(var(--muted-foreground));font-size:.875rem;text-decoration:none;"></a></li>
+                <li><a href="${root}equipo.html" data-i18n="nav.team" class="story-link" style="color:hsl(var(--muted-foreground));font-size:.875rem;text-decoration:none;"></a></li>
+                <li><a href="${root}misiones.html" data-i18n="nav.missions" class="story-link" style="color:hsl(var(--muted-foreground));font-size:.875rem;text-decoration:none;"></a></li>
+                <li><a href="${root}tienda.html" data-i18n="nav.store" class="story-link" style="color:hsl(var(--muted-foreground));font-size:.875rem;text-decoration:none;"></a></li>
               </ul>
             </div>
             <div>
@@ -262,10 +281,23 @@
     const r = ensureToastRegion();
     const node = document.createElement('div');
     node.className = 'toast';
-    node.innerHTML = `<strong>${title}</strong><small>${desc || ''}</small>`;
+    const icon = ICONS.info; // Default icon
+    node.innerHTML = `
+      <div class="toast-icon">${icon}</div>
+      <div class="toast-content">
+        <span class="toast-title">${title}</span>
+        ${desc ? `<span class="toast-desc">${desc}</span>` : ''}
+      </div>
+    `;
     r.appendChild(node);
-    setTimeout(() => { node.style.transition = 'opacity .3s'; node.style.opacity = '0'; }, 3500);
-    setTimeout(() => node.remove(), 4000);
+    
+    // Auto-remove after some time
+    setTimeout(() => {
+      node.style.transition = 'opacity 0.4s, transform 0.4s';
+      node.style.opacity = '0';
+      node.style.transform = 'translateY(-1rem) scale(0.95)';
+    }, 4500);
+    setTimeout(() => node.remove(), 5000);
   };
 
   // ---------- Modal ----------
@@ -305,16 +337,31 @@
     els.forEach(e => io.observe(e));
   }
 
-  // ---------- Carousel (lightweight) ----------
+  // ---------- Carousel (Infinite + Pause on Interaction) ----------
   window.JITA.carousel = function (root) {
     const viewport = root.querySelector('.carousel-viewport');
     const track = root.querySelector('.carousel-track');
     const prev = root.querySelector('.carousel-btn-prev');
     const next = root.querySelector('.carousel-btn-next');
+    
     let index = 0;
     let autoplayTimer = null;
     let isPaused = false;
+    let isTransitioning = false;
 
+    // Clone slides for infinite loop
+    const originalSlides = Array.from(track.children);
+    if (originalSlides.length === 0) return;
+
+    const firstClones = originalSlides.map(s => s.cloneNode(true));
+    const lastClones = originalSlides.map(s => s.cloneNode(true));
+    
+    firstClones.forEach(clone => track.appendChild(clone));
+    lastClones.reverse().forEach(clone => track.insertBefore(clone, track.firstChild));
+
+    // Initial position (offset by clones)
+    index = originalSlides.length;
+    
     function visibleCount() {
       const w = window.innerWidth;
       if (w >= 1280) return 4;
@@ -322,20 +369,32 @@
       if (w >= 768) return 2;
       return 1;
     }
-    function maxIndex() {
-      return Math.max(0, track.children.length - visibleCount());
-    }
-    function update() {
+
+    function update(animate = true) {
       const slideW = viewport.clientWidth / visibleCount();
+      track.style.transition = animate ? 'transform .5s cubic-bezier(.5,0,.2,1)' : 'none';
       track.style.transform = `translateX(-${index * slideW}px)`;
     }
+
+    function jumpIfNeeded() {
+      const len = originalSlides.length;
+      if (index >= len * 2) {
+        index = len;
+        update(false);
+      } else if (index < len) {
+        index = len * 2 - 1;
+        update(false);
+      }
+      isTransitioning = false;
+    }
+
+    track.addEventListener('transitionend', jumpIfNeeded);
+
     function go(dir) {
-      const m = maxIndex();
-      if (m <= 0) return;
+      if (isTransitioning) return;
+      isTransitioning = true;
       index += dir;
-      if (index < 0) index = m;     // loop to end
-      if (index > m) index = 0;     // loop to start
-      update();
+      update(true);
     }
 
     function startAutoplay() {
@@ -344,40 +403,41 @@
         if (!isPaused) go(1);
       }, 5000);
     }
+
     function stopAutoplay() {
-      if (autoplayTimer) {
-        clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
+      if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
     }
 
     prev && prev.addEventListener('click', () => { go(-1); startAutoplay(); });
     next && next.addEventListener('click', () => { go(1); startAutoplay(); });
-    window.addEventListener('resize', update);
     
-    // Iniciar
-    update();
-    startAutoplay();
-
-    // Pausar en hover (Desktop)
+    window.addEventListener('resize', () => update(false));
+    
+    // Interaction Pause
     root.addEventListener('mouseenter', () => { isPaused = true; });
     root.addEventListener('mouseleave', () => { isPaused = false; });
-
-    // Touch swipe y pause (Mobile)
+    
+    // Mobile Touch
     let startX = 0, dx = 0;
     viewport.addEventListener('touchstart', e => { 
       isPaused = true; 
       startX = e.touches[0].clientX; 
       dx = 0; 
     }, { passive: true });
+    
     viewport.addEventListener('touchmove', e => { 
       dx = e.touches[0].clientX - startX; 
     }, { passive: true });
+    
     viewport.addEventListener('touchend', () => { 
       isPaused = false; 
       if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); 
       startAutoplay();
     });
+
+    // Boot
+    setTimeout(() => update(false), 50); 
+    startAutoplay();
   };
 
   // ---------- Boot ----------
@@ -387,5 +447,23 @@
     renderFooter();
     applyTranslations();
     initReveal();
+
+    // Preloader
+    setTimeout(() => {
+      const preloader = document.getElementById('jita-preloader');
+      if (preloader) preloader.classList.add('preloader-hidden');
+    }, 1500);
+
+    // Global donation handler
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-donate');
+      if (btn) {
+        e.preventDefault();
+        const isEs = getLang() === 'es';
+        const title = isEs ? 'Próximamente' : 'Coming Soon';
+        const desc = isEs ? 'Estamos trabajando en nuestra plataforma de donaciones.' : 'We are working on our donation platform.';
+        if (window.JITA.toast) window.JITA.toast(title, desc);
+      }
+    });
   });
 })();

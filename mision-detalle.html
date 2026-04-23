@@ -5,10 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Detalle de Misión — JITA</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/x-icon">
 </head>
 <body style="display:flex;flex-direction:column;min-height:100vh;">
-<div id="jita-navbar"></div>
+  <div id="jita-preloader">
+    <div class="preloader-content">
+      <img src="assets/images/logo/logo.png" alt="JITA Logo" class="preloader-logo">
+      <div class="preloader-bar"><div class="preloader-progress"></div></div>
+    </div>
+  </div>
+
+  <div id="jita-navbar"></div>
 <main style="flex:1;" id="detail-root"></main>
 <div id="jita-footer"></div>
 
@@ -94,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="jita-card" style="padding:1.5rem;background:linear-gradient(135deg,hsl(var(--primary) / .08),hsl(var(--accent) / .08));">
             <h3 style="font-family:'Playfair Display',serif;font-weight:700;margin:0 0 .5rem;">¿Quieres Apoyar?</h3>
             <p style="color:hsl(var(--muted-foreground));font-size:.9rem;margin:0 0 1rem;">Tu contribución nos permite llevar la palabra de Dios y ayuda práctica a más comunidades.</p>
-            <button class="btn btn-primary" style="width:100%;margin-bottom:.5rem;">Hacer una Donación</button>
+            <button class="btn btn-primary btn-donate" style="width:100%;margin-bottom:.5rem;">Hacer una Donación</button>
             <button class="btn btn-outline" style="width:100%;" id="md-apply">Aplicar para una Misión</button>
           </div>
         </aside>

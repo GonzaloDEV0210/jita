@@ -9,10 +9,17 @@
     content="JITA: misiones que llevan la palabra de Dios y ayuda práctica a comunidades alrededor del mundo." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="shortcut icon" href="/assets/images/logo/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/x-icon">
 </head>
 
 <body style="display:flex;flex-direction:column;min-height:100vh;">
+  <div id="jita-preloader">
+    <div class="preloader-content">
+      <img src="assets/images/logo/logo.png" alt="JITA Logo" class="preloader-logo">
+      <div class="preloader-bar"><div class="preloader-progress"></div></div>
+    </div>
+  </div>
+
   <div id="jita-navbar"></div>
 
   <main style="flex:1;">
@@ -99,10 +106,10 @@
                 de líderes comprometidos.<br><br>¡INSCRÍBETE AQUÍ!</p>
             </div>
             <div class="flex" style="gap:1rem;flex-direction:column;" id="nm-actions">
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLScVPwZIPqaNtOSnuwDrpH8c-cBy1HGWR4ic8pozLDqbkO1i_A/viewform"
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSezRHWkAxQnOFrZQO4XZY_GBAPwWj21TbzaabSABZ3QfqHeBg/viewform"
                 target="_blank" class="btn btn-primary btn-lg" data-i18n="index.nextMission.apply"></a>
               <a class="btn btn-outline btn-lg"
-                href="https://drive.google.com/file/d/1annHJndhBAz5iQzEULksGEhFaMN6Gym5/view" target="_blank"
+                href="misiones/campamento-2026.html"
                 data-i18n="index.nextMission.details"></a>
             </div>
           </div>
@@ -134,7 +141,7 @@
           <div class="flex" style="gap:1rem;flex-direction:column;justify-content:center;align-items:center;"
             id="cta-buttons">
             <a class="btn btn-primary btn-lg" href="quienes-somos.html" data-i18n="index.cta.about"></a>
-            <a class="btn btn-outline btn-lg" href="tienda.html" data-i18n="index.cta.support"></a>
+            <a class="btn btn-outline btn-lg btn-donate" href="tienda.html" data-i18n="index.cta.support"></a>
           </div>
         </div>
       </div>
@@ -203,9 +210,9 @@
 
       // Recent missions cards
       const recentMissions = [
-        { title: 'index.recent.mission1.title', desc: 'index.recent.mission1.desc', image: 'https://i.ibb.co/C3sCRPhb/mission2023-2.webp' },
-        { title: 'index.recent.mission2.title', desc: 'index.recent.mission2.desc', image: 'https://i.ibb.co/MyYF9JVV/mission2022-9.webp' },
-        { title: 'index.recent.mission3.title', desc: 'index.recent.mission3.desc', image: 'https://i.ibb.co/Fkh69J9d/mission2021-4.webp' }
+        { title: 'index.recent.mission1.title', desc: 'index.recent.mission1.desc', image: 'https://i.ibb.co/C3sCRPhb/mission2023-2.webp', url: 'misiones/peru-2023.html' },
+        { title: 'index.recent.mission2.title', desc: 'index.recent.mission2.desc', image: 'https://i.ibb.co/MyYF9JVV/mission2022-9.webp', url: 'misiones/peru-2022.html' },
+        { title: 'index.recent.mission3.title', desc: 'index.recent.mission3.desc', image: 'https://i.ibb.co/Fkh69J9d/mission2021-4.webp', url: 'misiones/peru-2021.html' }
       ];
       document.getElementById('recent-grid').innerHTML = recentMissions.map(m => `
     <div class="jita-card hover-lift" style="overflow:hidden;">
@@ -216,7 +223,7 @@
       <div style="padding:1.25rem;">
         <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;margin:0 0 .5rem;" data-i18n="${m.title}"></h3>
         <p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0 0 1rem;" data-i18n="${m.desc}"></p>
-        <a href="misiones.html" class="btn btn-outline btn-sm" style="width:100%;" data-i18n="index.recent.readMore"></a>
+        <a href="${m.url}" class="btn btn-outline btn-sm" style="width:100%;" data-i18n="index.recent.readMore"></a>
       </div>
     </div>`).join('');
 

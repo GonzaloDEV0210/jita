@@ -6,10 +6,18 @@
 <title>Misiones — JITA</title>
 <meta name="description" content="Listado de misiones JITA: completadas y planificadas." />
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/x-icon">
 </head>
 <body style="display:flex;flex-direction:column;min-height:100vh;">
-<div id="jita-navbar"></div>
+  <div id="jita-preloader">
+    <div class="preloader-content">
+      <img src="assets/images/logo/logo.png" alt="JITA Logo" class="preloader-logo">
+      <div class="preloader-bar"><div class="preloader-progress"></div></div>
+    </div>
+  </div>
+
+  <div id="jita-navbar"></div>
 <main style="flex:1;">
 
   <section style="background:linear-gradient(90deg,hsl(var(--primary) / .1),hsl(var(--accent) / .1));padding:5rem 0;">
@@ -41,8 +49,8 @@
       <h2 class="text-3xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="missions.cta.title"></h2>
       <p style="color:hsl(var(--muted-foreground));margin:0 auto 2rem;max-width:42rem;" data-i18n="missions.cta.subtitle"></p>
       <div class="flex" style="gap:1rem;justify-content:center;flex-direction:column;" id="missions-cta-row">
-        <button class="btn btn-primary btn-lg" id="m-apply" data-i18n="missions.cta.apply"></button>
-        <button class="btn btn-outline btn-lg" data-i18n="missions.cta.donate"></button>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSezRHWkAxQnOFrZQO4XZY_GBAPwWj21TbzaabSABZ3QfqHeBg/viewform" target="_blank" class="btn btn-primary btn-lg" data-i18n="missions.cta.apply"></a>
+        <button class="btn btn-outline btn-lg btn-donate" data-i18n="missions.cta.donate"></button>
       </div>
     </div>
   </section>
@@ -61,10 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const countries = [
     { id: 'todos', name: () => JITA.t('missions.allCountries') },
-    { id: 'guatemala', name: () => 'Guatemala' },
-    { id: 'honduras',  name: () => 'Honduras' },
-    { id: 'colombia',  name: () => 'Colombia' },
     { id: 'peru',      name: () => 'Perú' },
+    { id: 'colombia',  name: () => 'Colombia' },
+    { id: 'togo',      name: () => 'Togo' },
   ];
 
   function renderFilter() {
@@ -86,7 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return `
       <div class="jita-card hover-lift" style="overflow:hidden;">
         <div style="position:relative;">
-          <div style="height:12rem;background:linear-gradient(135deg,hsl(var(--primary) / .2),hsl(var(--accent) / .2));display:flex;align-items:center;justify-content:center;font-size:3rem;color:hsl(var(--primary) / .6);">${JITA.icon('heart')}</div>
+          <div style="height:12rem;background:hsl(var(--muted));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+            ${m.image ? `<img src="${m.image}" alt="${m.title}" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" />` : ''}
+            <div style="font-size:3rem;color:hsl(var(--primary) / .3);">${JITA.icon('heart')}</div>
+          </div>
           <div style="position:absolute;top:1rem;right:1rem;">${statusBadge(m.status)}</div>
         </div>
         <div style="padding:1.25rem;">
@@ -101,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <h4 style="font-size:.875rem;font-weight:600;margin:0 0 .25rem;font-family:Inter,sans-serif;" data-i18n="missions.impact"></h4>
             <p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0;">${m.impact}</p>
           </div>
-          <a class="btn btn-outline" style="width:100%;" href="mision-detalle.html?id=${m.id}" data-i18n="missions.viewDetails"></a>
+          <a class="btn btn-outline" style="width:100%;" href="${m.customUrl || `mision-detalle.html?id=${m.id}`}" data-i18n="missions.viewDetails"></a>
         </div>
       </div>`;
   }
@@ -135,14 +145,19 @@ document.addEventListener('DOMContentLoaded', () => {
               <p style="margin:0;color:hsl(var(--muted-foreground));">${next.impact}</p>
             </div>
             <div class="flex" style="gap:1rem;flex-direction:column;" id="nm-actions">
-              <button class="btn btn-primary btn-lg" id="nm-apply" data-i18n="missions.apply"></button>
-              <a class="btn btn-outline btn-lg" href="mision-detalle.html?id=${next.id}" data-i18n="missions.details"></a>
+              ${next.formUrl 
+                ? `<a href="${next.formUrl}" target="_blank" class="btn btn-primary btn-lg" data-i18n="missions.apply"></a>`
+                : `<button class="btn btn-primary btn-lg" id="nm-apply" data-i18n="missions.apply"></button>`
+              }
+              <a class="btn btn-outline btn-lg" href="${next.customUrl || next.detailsUrl || `mision-detalle.html?id=${next.id}`}" ${(next.detailsUrl && !next.customUrl) ? 'target="_blank"' : ''} data-i18n="missions.details"></a>
             </div>
           </div>
         </div>
       </div>`;
     JITA.applyTranslations();
-    document.getElementById('nm-apply').addEventListener('click', () => JITA.openApplicationForm(next.title));
+    if (!next.formUrl) {
+      document.getElementById('nm-apply').addEventListener('click', () => JITA.openApplicationForm(next.title));
+    }
     const mq = window.matchMedia('(min-width:640px)');
     const upd = () => document.getElementById('nm-actions').style.flexDirection = mq.matches ? 'row' : 'column';
     upd(); mq.addEventListener('change', upd);
@@ -155,8 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const mq = window.matchMedia('(min-width:640px)');
   const upd = () => document.getElementById('missions-cta-row').style.flexDirection = mq.matches ? 'row' : 'column';
   upd(); mq.addEventListener('change', upd);
-
-  document.getElementById('m-apply').addEventListener('click', () => JITA.openApplicationForm());
 
   document.addEventListener('jita:lang-changed', () => { renderFilter(); renderGrid(); renderNextMission(); });
 });

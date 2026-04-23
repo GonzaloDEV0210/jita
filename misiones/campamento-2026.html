@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Campamento Juvenil 2026 — JITA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="shortcut icon" href="../assets/images/logo/logo.png" type="image/x-icon">
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh;">
+  <div id="jita-preloader">
+    <div class="preloader-content">
+      <img src="../assets/images/logo/logo.png" alt="JITA Logo" class="preloader-logo">
+      <div class="preloader-bar"><div class="preloader-progress"></div></div>
+    </div>
+  </div>
+
+  <div id="jita-navbar"></div>
+
+  <main style="flex:1; display:flex; align-items:center; justify-content:center; padding:5rem 0; background:linear-gradient(135deg, hsl(var(--primary) / .05), hsl(var(--accent) / .05));">
+    <div style="max-width:40rem; margin:0 auto; padding:0 2rem; text-align:center;" class="reveal">
+      <div style="margin-bottom:2rem; display:inline-flex; align-items:center; justify-content:center; width:5rem; height:5rem; background:hsl(var(--primary) / .1); color:hsl(var(--primary)); border-radius:50%;">
+        <span id="info-icon" style="transform:scale(2);"></span>
+      </div>
+      
+      <h1 style="font-family:'Playfair Display',serif; font-size:3rem; font-weight:700; margin-bottom:1.5rem; color:#1a1a1a;">Campamento Juvenil 2026</h1>
+      <h2 style="font-size:1.5rem; color:hsl(var(--primary)); font-weight:600; margin-bottom:2rem;">Próximamente se publicará más información</h2>
+      
+      <div style="font-size:1.1rem; line-height:1.8; color:hsl(var(--muted-foreground)); margin-bottom:3rem;">
+        <p>Estamos preparando cada detalle para que el Campamento Juvenil 2026: <strong>"His Name Is Jesus"</strong> en Lima, Perú, sea una experiencia inolvidable de fe, comunidad y transformación.</p>
+        <p style="margin-top:1rem;">Mantente atento a nuestras redes sociales y a esta página para conocer la agenda, los oradores invitados y los detalles de inscripción.</p>
+      </div>
+      
+      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem;">
+        <a href="../misiones.html" class="btn btn-outline">
+          <span id="back-icon" style="margin-right:0.5rem;"></span> Volver a Misiones
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSezRHWkAxQnOFrZQO4XZY_GBAPwWj21TbzaabSABZ3QfqHeBg/viewform" target="_blank" class="btn btn-primary">
+          Registrar Interés
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <div id="jita-footer"></div>
+
+  <script src="../translations.js"></script>
+  <script src="../script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('info-icon').innerHTML = JITA.icon('info');
+      document.getElementById('back-icon').innerHTML = JITA.icon('chevronLeft');
+      
+      JITA.applyTranslations();
+      document.addEventListener('jita:lang-changed', () => JITA.applyTranslations());
+    });
+  </script>
+</body>
+</html>

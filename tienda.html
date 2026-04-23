@@ -5,10 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tienda — JITA</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/x-icon">
 </head>
 <body style="display:flex;flex-direction:column;min-height:100vh;">
-<div id="jita-navbar"></div>
+  <div id="jita-preloader">
+    <div class="preloader-content">
+      <img src="assets/images/logo/logo.png" alt="JITA Logo" class="preloader-logo">
+      <div class="preloader-bar"><div class="preloader-progress"></div></div>
+    </div>
+  </div>
+
+  <div id="jita-navbar"></div>
 <main style="flex:1;display:flex;align-items:center;justify-content:center;padding:5rem 1rem;background:linear-gradient(135deg,hsl(var(--accent) / .1),hsl(var(--background)),hsl(var(--primary) / .1));">
   <div style="max-width:42rem;width:100%;" class="animate-scale-in">
     <div class="jita-card" style="border:2px solid hsl(var(--primary) / .25);padding:3rem;text-align:center;">

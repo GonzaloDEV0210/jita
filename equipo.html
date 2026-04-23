@@ -6,10 +6,18 @@
 <title>Nuestro Equipo — JITA</title>
 <meta name="description" content="Conoce a los líderes y misioneros de Jesus Is The Answer LLC." />
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="shortcut icon" href="assets/images/logo/logo.png" type="image/x-icon">
 </head>
 <body style="display:flex;flex-direction:column;min-height:100vh;">
-<div id="jita-navbar"></div>
+  <div id="jita-preloader">
+    <div class="preloader-content">
+      <img src="assets/images/logo/logo.png" alt="JITA Logo" class="preloader-logo">
+      <div class="preloader-bar"><div class="preloader-progress"></div></div>
+    </div>
+  </div>
+
+  <div id="jita-navbar"></div>
 <main style="flex:1;">
 
   <section style="background:linear-gradient(90deg,hsl(var(--primary) / .1),hsl(var(--accent) / .1));padding:5rem 0;">
@@ -25,7 +33,17 @@
         <h2 class="text-3xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="team.leadership"></h2>
         <p style="color:hsl(var(--muted-foreground));max-width:42rem;margin:0 auto;" data-i18n="team.leadership.description"></p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2" style="gap:2rem;max-width:64rem;margin:0 auto;" id="leaders-grid"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2" style="gap:2rem;max-width:52rem;margin:0 auto;" id="leaders-grid"></div>
+    </div>
+  </section>
+
+  <section style="padding:4rem 0; background: hsl(var(--muted) / .1);" class="reveal">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <h2 class="text-3xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="team.collaborators"></h2>
+        <p style="color:hsl(var(--muted-foreground));max-width:42rem;margin:0 auto;" data-i18n="team.collaborators.description"></p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2" style="gap:2rem;max-width:52rem;margin:0 auto;" id="collaborators-grid"></div>
     </div>
   </section>
 
@@ -51,13 +69,29 @@
     </div>
   </section>
 
+  <section style="padding:4rem 0;" class="reveal">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1rem;">
+      <div style="text-align:center;margin-bottom:3rem;">
+        <h2 class="text-3xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="team.testimonials"></h2>
+        <p style="color:hsl(var(--muted-foreground));max-width:42rem;margin:0 auto;" data-i18n="team.testimonials.description"></p>
+      </div>
+      <div class="carousel" id="testimonials-carousel">
+        <div class="carousel-viewport" style="padding-bottom: 2rem;">
+          <div class="carousel-track" id="testimonials-track"></div>
+        </div>
+        <button class="carousel-btn carousel-btn-prev"></button>
+        <button class="carousel-btn carousel-btn-next"></button>
+      </div>
+    </div>
+  </section>
+
   <section style="padding:4rem 0;background:hsl(var(--muted) / .3);" class="reveal">
     <div style="max-width:80rem;margin:0 auto;padding:0 1rem;text-align:center;">
       <h2 class="text-3xl" style="font-weight:700;margin:0 0 1rem;" data-i18n="team.cta.title"></h2>
       <p style="color:hsl(var(--muted-foreground));margin:0 auto 2rem;max-width:42rem;" data-i18n="team.cta.subtitle"></p>
       <div class="flex" style="gap:1rem;justify-content:center;flex-direction:column;" id="team-cta-row">
-        <button class="btn btn-primary btn-lg" data-i18n="team.cta.join" id="team-join"></button>
-        <button class="btn btn-outline btn-lg" data-i18n="team.cta.contact"></button>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSezRHWkAxQnOFrZQO4XZY_GBAPwWj21TbzaabSABZ3QfqHeBg/viewform" target="_blank" rel="noopener" class="btn btn-primary btn-lg" data-i18n="team.cta.join"></a>
+        <a href="https://wa.me/+51916785428" target="_blank" rel="noopener" class="btn btn-outline btn-lg" data-i18n="team.cta.contact"></a>
       </div>
     </div>
   </section>
@@ -71,48 +105,260 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const leaders = [
-    { name: 'Pastor Juan Martínez', role: 'Director General y Fundador', location: 'Liderazgo Ministerial', experience: '15 años', specialties: ['Liderazgo','Evangelismo','Pastoral'], bio: 'Fundador de JITA con pasión por llevar el evangelio a los más necesitados.', missions: 45 },
-    { name: 'María Elena de Martínez', role: 'Co-Directora y Coordinadora General', location: 'Ministerio Familiar', experience: '12 años', specialties: ['Ministerio Femenino','Coordinación'], bio: 'Co-fundadora y pilar fundamental del ministerio.', missions: 38 },
+    { 
+      name: 'David Roelofs', 
+      role: 'Director Ministerial', 
+      location: 'Liderazgo Ministerial', 
+      experience: '15 años', 
+      specialties: ['Gestión Financiera','Apoyo Misionero','Planificación','Administración Ministerial'], 
+      bio: 'Fundador de JITA con una pasión ardiente por llevar el evangelio a los lugares más necesitados del mundo. Junto a su esposa, lidera esta misión con amor y dedicación.', 
+      missions: 45,
+      image: 'assets/images/team/David Roelofs.jpg'
+    },
+    { 
+      name: 'Mónica Roelofs', 
+      role: 'Directora Ministerial', 
+      location: 'Liderazgo Ministerial', 
+      experience: '12 años', 
+      specialties: ['Liderazgo','Coordinación','Predicación','Convocatoria','Logística'], 
+      bio: 'Fundadora de JITA, movida por una profunda pasión por llevar el evangelio a las comunidades más necesitadas del mundo. Junto a su esposo, guía esta misión con entrega y amor.', 
+      missions: 38,
+      image: 'assets/images/team/MONICA ROELOFS_ROUND.jpg'
+    },
+  ];
+  const collaborators = [
+    { 
+      name: 'Jorge Luis Ayala', 
+      role: 'Misionero Colaborador', 
+      location: 'Perú', 
+      specialties: ['Coordinación','Enseñanza','Misiones','Acompañamiento'], 
+      missions: 22,
+      image: 'assets/images/team/JORGE LUIS AYALA_2_11zon.jpg'
+    },
+    { 
+      name: 'Marife Albornoz', 
+      role: 'Misionera Colaboradora', 
+      location: 'Perú', 
+      specialties: ['Apoyo','Evangelismo','Humildad','Campo'], 
+      missions: 22,
+      image: 'assets/images/team/MARIFE ALBORNOZ_11zon.jpg'
+    },
   ];
   const missionaries = [
-    { name: 'David Hernández', role: 'Misionero de Campo', location: 'Honduras', specialties: ['Evangelismo','Trabajo Juvenil'], missions: 24 },
-    { name: 'Sarah Johnson', role: 'Misionera Médica', location: 'Nicaragua', specialties: ['Enfermería','Salud Materno-Infantil'], missions: 22 },
-    { name: 'Luis Ramírez', role: 'Constructor Misionero', location: 'El Salvador', specialties: ['Construcción','Capacitación'], missions: 19 },
-    { name: 'Rebecca Smith', role: 'Misionera Educativa', location: 'Costa Rica', specialties: ['Educación','Alfabetización'], missions: 16 },
-    { name: 'Miguel Ángel López', role: 'Misionero de Apoyo', location: 'Panamá', specialties: ['Logística','Coordinación'], missions: 15 },
-    { name: 'Grace Williams', role: 'Misionera Social', location: 'Belice', specialties: ['Trabajo Social','Desarrollo'], missions: 13 },
+    { 
+      name: 'Maria Alejandra Sotelo', 
+      role: 'Misionera Traductora', 
+      location: 'Colombia', 
+      specialties: ['Idiomas','Servicio','Apoyo','Ministerio'], 
+      image: 'assets/images/team/MARIA ALEJANDRA SOTELO_6_11zon.jpg' 
+    },
+    { 
+      name: 'Kevin Schowengerdt', 
+      role: 'Misionero de Apoyo', 
+      location: 'Estados Unidos', 
+      specialties: ['Predicación','Misiones','Dedicación','Ministerio'], 
+      image: 'assets/images/team/KEVIN SCHOWENGERDT_7_11zon.jpg' 
+    },
+    { 
+      name: 'Alberto Centeno', 
+      role: 'Misionero de Apoyo', 
+      location: 'Perú', 
+      specialties: ['Adorador','Evangelismo','Dedicación','Enseñanza'], 
+      image: 'assets/images/team/ALBERTO CENTENO_4_11zon.jpg' 
+    },
+    { 
+      name: 'Ana Chuna', 
+      role: 'Misionera de Apoyo', 
+      location: 'Perú', 
+      specialties: ['Niños','Evangelismo','Misiones','Apoyo'], 
+      image: 'assets/images/team/ANA CHUNA_1_11zon.jpg' 
+    },
+    { 
+      name: 'Claudia Lorena Lopez', 
+      role: 'Misionera de Apoyo', 
+      location: 'Perú', 
+      specialties: ['Pastoral','Liderazgo','Ministerio','Apoyo'], 
+      image: 'assets/images/team/CLAUDIA LORENA LOPEZ_14_11zon.jpg' 
+    },
+    { 
+      name: 'Flor de María Pino', 
+      role: 'Misionera de Apoyo', 
+      location: 'Perú', 
+      specialties: ['Servicio','Apoyo','Oración','Campo'], 
+      image: 'assets/images/team/FLOR DE MARIA PINO_17_11zon.jpg' 
+    },
+    { 
+      name: 'Francy Elena Burbano', 
+      role: 'Misionera de Apoyo', 
+      location: 'Colombia', 
+      specialties: ['Niños','Excelencia','Servicio','Enseñanza'], 
+      image: 'assets/images/team/FRANCY ELENA BURBANO_3_11zon.jpg' 
+    },
+    { 
+      name: 'Giovanna Guzmán', 
+      role: 'Misionera de Apoyo', 
+      location: 'Perú', 
+      specialties: ['Apoyo','Ministerio','Servicio','Dedicación'], 
+      image: 'assets/images/team/GIOVANNA GUZMÁN_9.jpg' 
+    },
+    { 
+      name: 'Hofer Gordon', 
+      role: 'Misionero Pastoral', 
+      location: 'Estados Unidos', 
+      specialties: ['Pastoral','Enseñanza','Misiones','Ministerio'], 
+      image: 'assets/images/team/HOFER GORDON_12_11zon.jpg' 
+    },
+    { 
+      name: 'Iván Galarza', 
+      role: 'Misionero Pastoral', 
+      location: 'Perú', 
+      specialties: ['Pastoral','Enseñanza','Misiones','Ministerio'], 
+      image: 'assets/images/team/IVAN GALARZA_15_11zon.jpg' 
+    },
+    { 
+      name: 'Jorge Corahua', 
+      role: 'Misionero Pastoral', 
+      location: 'Perú', 
+      specialties: ['Pastoral','Enseñanza','Misiones','Ministerio'], 
+      image: 'assets/images/team/JORGE CORAHUA_11_11zon.jpg' 
+    },
+    { 
+      name: 'Kelly Agudelo', 
+      role: 'Misionera de Apoyo', 
+      location: 'Colombia', 
+      specialties: ['Apoyo','Servicio','Testimonio','Perseverancia'], 
+      image: 'assets/images/team/KELLY AGUDELO_13_11zon.jpg' 
+    },
+    { 
+      name: 'Kelly Corrie Hofer', 
+      role: 'Misionera de Apoyo', 
+      location: 'Estados Unidos', 
+      specialties: ['Enseñanza','Valentia','Oración','Evangelismo'], 
+      image: 'assets/images/team/KELLY CORRIE HOFER_8_11zon.jpg' 
+    },
+    { 
+      name: 'Luis Ornelas', 
+      role: 'Misionero de Apoyo', 
+      location: 'México', 
+      specialties: ['Servicio','Apoyo','Traducción','Compromiso'], 
+      image: 'assets/images/team/LUIS ORNELAS_16_11zon.jpg' 
+    },
+    { 
+      name: 'Sandra Milena Correa', 
+      role: 'Misionera de Apoyo', 
+      location: 'Perú', 
+      specialties: ['Apoyo','Servicio','Humildad','Voluntariado'], 
+      image: 'assets/images/team/SANDRA MILENA CORREA_10_11zon.jpg' 
+    },
+  ];
+  const testimonials = [
+    { 
+      name: 'Marife Albornoz', 
+      role: 'Misionera Colaboradora', 
+      text: 'Hola, soy Marife. La Misión 2025 en Huamparán – Huari llenó mi corazón de fe y gratitud. En los cinco pueblos vimos la alegría de los niños y la esperanza de los padres al recibir el mensaje de Cristo. Presencié vidas transformadas por el Espíritu Santo, recordando que es Dios quien obra.', 
+      image: 'assets/images/team/MARIFE ALBORNOZ_11zon.jpg' 
+    },
+    { 
+      name: 'Hofer Gordon', 
+      role: 'Misionero Pastoral', 
+      text: 'He participado en varias misiones con Jesus Is the Answer Ministry, y siempre han sido una bendición. Tras más de 50 años en misiones, puedo decir que Mónica organiza los viajes de manera excelente y Dios respalda este ministerio. Animo a todos a orar y apoyar.', 
+      image: 'assets/images/team/HOFER GORDON_12_11zon.jpg' 
+    },
+    { 
+      name: 'Jorge Luis Ayala', 
+      role: 'Misionero Colaborador', 
+      text: 'Me emocionó preparar el programa y ver la cantidad de niños que participarían. En la primera visita, la expectativa de los pastores y de los pueblos llenó mi corazón. Aunque se anunciaban lluvias, oramos y Dios nos dio mañanas soleadas. Fue hermoso ver a los niños participar con alegría.', 
+      image: 'assets/images/team/JORGE LUIS AYALA_2_11zon.jpg' 
+    },
+    { 
+      name: 'Ana Chuna', 
+      role: 'Misionera de Apoyo', 
+      text: 'La misión Jesús es la Respuesta me ha enseñado a depender totalmente de Dios, entendiendo que Él provee, guía y nos da creatividad para llegar a cada persona según su necesidad. Es hermoso ver cómo la gente tiene un encuentro con el Señor y cómo Él transforma sus vidas.', 
+      image: 'assets/images/team/ANA CHUNA_1_11zon.jpg' 
+    },
+    { 
+      name: 'Alberto Centeno', 
+      role: 'Misionero de Apoyo', 
+      text: 'Agradezco haber servido en el ministerio Jesús es la Respuesta, donde Dios me enseñó a amar las almas y pude ver vidas transformadas. Fue una bendición participar en la misión 2025 en Huamparán. Espero nuevas misiones y siempre estaré dispuesto al llamado.', 
+      image: 'assets/images/team/ALBERTO CENTENO_4_11zon.jpg' 
+    },
+    { 
+      name: 'Kelly Agudelo', 
+      role: 'Misionera de Apoyo', 
+      text: 'El ministerio Jesús es la Respuesta ha sido el cumplimiento de una promesa de Dios para mí. Desde niña soñaba con las misiones, y a los 42 años Dios me abrió la puerta y mi esposo e hijos me apoyaron. Agradezco a Dios por permitirme llevar el mensaje de Jesús con propósito.', 
+      image: 'assets/images/team/KELLY AGUDELO_13_11zon.jpg' 
+    },
+    { 
+      name: 'Jorge Corahua y Claudia Lorena', 
+      role: 'Misioneros Pastorales', 
+      text: 'Doy gracias a Dios por su vida y por la labor que realizan llevando el evangelio. Agradezco la oportunidad que mi esposo y yo tuvimos de participar en la misión Perú 2025, una experiencia hermosa al ver tantas vidas necesitadas de Jesús.', 
+      image: 'assets/images/team/JORGE CORAHUA Y CLAUDIA LORENA_11zon.jpg' 
+    },
   ];
 
   function card(m) {
+    const isLeader = m.image && (m.name.includes('Roelofs'));
     return `
-      <div class="jita-card hover-lift" style="overflow:hidden;">
+      <div class="jita-card hover-lift" style="overflow:hidden; border-radius: 1rem; border: 1px solid #f0f0f0; box-shadow: 0 4px 20px rgba(0,0,0,0.06); max-width: 24rem; margin: 0 auto;">
         <div style="position:relative;">
-          <div style="height:14rem;background:linear-gradient(135deg,hsl(var(--primary) / .2),hsl(var(--accent) / .2));display:flex;align-items:center;justify-content:center;font-size:3rem;color:hsl(var(--primary) / .6);">${JITA.icon('users')}</div>
-          <span class="badge" style="position:absolute;top:1rem;right:1rem;background:hsl(var(--primary) / .9);">${m.missions} <span data-i18n="team.missions.count"></span></span>
+          ${m.image 
+            ? `<img src="${m.image}" alt="${m.name}" style="width:100%; height:16rem; object-fit:cover; display:block;" />`
+            : `<div style="height:14rem;background:linear-gradient(135deg,hsl(var(--primary) / .2),hsl(var(--accent) / .2));display:flex;align-items:center;justify-content:center;font-size:3rem;color:hsl(var(--primary) / .6);">${JITA.icon('users')}</div>`
+          }
+          ${m.missions ? `<span class="badge" style="position:absolute;top:1rem;right:1rem;background:#B68C69; color:white; padding: 0.25rem 0.75rem; font-weight: 500; font-size: 0.85rem;">${m.missions} <span data-i18n="team.missions.count"></span></span>` : ''}
         </div>
-        <div style="padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;">
+        <div style="padding:1.5rem;display:flex;flex-direction:column;gap:1rem;">
           <div>
-            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;margin:0;">${m.name}</h3>
-            <p style="color:hsl(var(--primary));font-weight:500;margin:.15rem 0 0;">${m.role}</p>
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;margin:0; color: #1a1a1a;">${m.name}</h3>
+            <p style="color:#C19277;font-weight:500;margin:.25rem 0 0; font-size: 1rem;">${m.role}</p>
           </div>
-          <div style="display:flex;align-items:center;gap:.5rem;color:hsl(var(--muted-foreground));font-size:.875rem;">${JITA.icon('mapPin')} <span>${m.location}</span></div>
-          ${m.experience ? `<div style="display:flex;align-items:center;gap:.5rem;color:hsl(var(--muted-foreground));font-size:.875rem;">${JITA.icon('calendar')} <span>${m.experience} <span data-i18n="team.experience"></span></span></div>` : ''}
-          <div style="display:flex;flex-wrap:wrap;gap:.35rem;">
-            ${m.specialties.map(s => `<span class="badge badge-outline" style="font-size:.7rem;">${s}</span>`).join('')}
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <div style="display:flex;align-items:center;gap:.75rem;color:#737373;font-size:0.9rem;">
+              <span style="display:flex; opacity: 0.6;">${JITA.icon('mapPin')}</span> 
+              <span>${m.location}</span>
+            </div>
+            ${m.experience ? `
+              <div style="display:flex;align-items:center;gap:.75rem;color:#737373;font-size:0.9rem;">
+                <span style="display:flex; opacity: 0.6;">${JITA.icon('calendar')}</span> 
+                <span>${m.experience} <span data-i18n="team.experience"></span></span>
+              </div>` : ''}
           </div>
-          ${m.bio ? `<p style="font-size:.875rem;color:hsl(var(--muted-foreground));margin:0;">${m.bio}</p>` : ''}
+          <div style="display:flex;flex-wrap:wrap;gap:.4rem; margin: 0.25rem 0;">
+            ${m.specialties.map(s => `<span class="badge" style="background: white; color: #1a1a1a; border: 1px solid #e5e5e5; font-size:.75rem; font-weight: 600; padding: 0.35rem 0.7rem;">${s}</span>`).join('')}
+          </div>
+          ${m.bio ? `<p style="font-size:0.95rem;color:#666;margin:0; line-height: 1.5; font-family: 'Inter', sans-serif;">${m.bio}</p>` : ''}
         </div>
       </div>`;
   }
 
   document.getElementById('leaders-grid').innerHTML = leaders.map(card).join('');
+  document.getElementById('collaborators-grid').innerHTML = collaborators.map(card).join('');
   document.getElementById('missionaries-grid').innerHTML = missionaries.map(card).join('');
+
+  document.getElementById('testimonials-track').innerHTML = testimonials.map(t => `
+    <div class="carousel-slide">
+      <div class="jita-card" style="padding:2rem;height:100%;display:flex;flex-direction:column;gap:1.25rem;border-radius:1rem;">
+        <div style="color:hsl(var(--primary) / .3);font-size:3rem;line-height:1;margin-bottom:-1.5rem;font-family:'Playfair Display',serif;">&ldquo;</div>
+        <p style="font-style:italic;color:hsl(var(--muted-foreground));line-height:1.6;margin:0;flex:1;">${t.text}</p>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:.5rem;">
+          <img src="${t.image}" alt="${t.name}" style="width:3.5rem;height:3.5rem;border-radius:50%;object-fit:cover;border:2px solid hsl(var(--primary) / .2);" />
+          <div>
+            <h4 style="font-weight:700;margin:0;font-size:1rem;font-family:Inter,sans-serif;">${t.name}</h4>
+            <p style="color:hsl(var(--primary));font-size:.8rem;font-weight:500;margin:0;">${t.role}</p>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+  const testimonialsCarousel = document.getElementById('testimonials-carousel');
+  testimonialsCarousel.querySelector('.carousel-btn-prev').innerHTML = JITA.icon('chevronLeft');
+  testimonialsCarousel.querySelector('.carousel-btn-next').innerHTML = JITA.icon('chevronRight');
+  JITA.carousel(testimonialsCarousel);
 
   const stats = [
     ['award', '2', 'team.impact.founders'],
-    ['mapPin', '50+', 'team.impact.missionaries'],
-    ['calendar', '300+', 'team.impact.experience'],
-    ['users', '1000+', 'team.impact.missions'],
+    ['mapPin', '17+', 'team.impact.missionaries'],
+    ['calendar', '20+', 'team.impact.experience'],
+    ['users', '10+', 'team.impact.missions'],
   ];
   document.getElementById('impact-grid').innerHTML = stats.map(([i,n,k]) => `
     <div style="text-align:center;">
@@ -127,8 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const mq = window.matchMedia('(min-width:640px)');
   const upd = () => document.getElementById('team-cta-row').style.flexDirection = mq.matches ? 'row' : 'column';
   upd(); mq.addEventListener('change', upd);
-
-  document.getElementById('team-join').addEventListener('click', () => JITA.openApplicationForm());
 });
 </script>
 </body>

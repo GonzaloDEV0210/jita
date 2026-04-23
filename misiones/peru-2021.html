@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Misión Perú 2021 — JITA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="shortcut icon" href="../assets/images/logo/logo.png" type="image/x-icon">
+</head>
+<body style="display:flex;flex-direction:column;min-height:100vh;">
+  <div id="jita-preloader">
+    <div class="preloader-content">
+      <img src="../assets/images/logo/logo.png" alt="JITA Logo" class="preloader-logo">
+      <div class="preloader-bar"><div class="preloader-progress"></div></div>
+    </div>
+  </div>
+
+  <div id="jita-navbar"></div>
+
+  <main style="flex:1;">
+    <!-- Hero Section -->
+    <section style="position:relative; height:60vh; min-height:400px; display:flex; align-items:center; justify-content:center; color:white; overflow:hidden;">
+      <img src="https://i.ibb.co/Fkh69J9d/mission2021-4.webp" alt="Misión Perú 2021" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-1;" />
+      <div style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7)); z-index:-1;"></div>
+      <div style="max-width:80rem; margin:0 auto; padding:0 1rem; text-align:center;" class="animate-fade-in-up">
+        <a href="../misiones.html" style="display:inline-flex; align-items:center; gap:0.5rem; color:white; text-decoration:none; margin-bottom:2rem; font-weight:500; opacity:0.8; transition:opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8">
+          <span id="back-icon"></span> <span data-i18n="missions.back">Volver a Misiones</span>
+        </a>
+        <h1 class="text-4xl md:text-6xl" style="font-family:'Playfair Display',serif; font-weight:700; margin:0 0 1rem;">Misión Perú 2021</h1>
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:2rem; font-size:1.1rem; opacity:0.9;">
+          <span style="display:flex; align-items:center; gap:0.5rem;"><span id="pin-icon"></span> Lima, Perú</span>
+          <span style="display:flex; align-items:center; gap:0.5rem;"><span id="cal-icon"></span> 15-22 Marzo 2021</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview & Stats -->
+    <section style="padding:5rem 0;" class="reveal">
+      <div style="max-width:80rem; margin:0 auto; padding:0 1rem;">
+        <div class="grid grid-cols-1 lg:grid-cols-3" style="gap:4rem; align-items:start;">
+          <div class="lg:col-span-2">
+            <h2 style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; margin-bottom:1.5rem; color:#1a1a1a;">Un testimonio del amor de Dios</h2>
+            <div style="font-size:1.1rem; line-height:1.8; color:hsl(var(--muted-foreground)); display:flex; flex-direction:column; gap:1.5rem;">
+              <p>Esta misión fue un testimonio poderoso del amor de Dios en acción. Priorizamos compartir el evangelio y distribuir biblias a cada familia, mientras brindábamos atención médica gratuita y entregábamos canastas de alimentos con productos básicos.</p>
+              <p>Durante una semana, compartimos la palabra de Dios en cada hogar, realizamos cultos evangelísticos, distribuimos biblias, preparamos desayunos y almuerzos para las familias, entregamos juguetes a los niños, y brindamos consultas médicas, vacunación y medicamentos gratuitos.</p>
+            </div>
+          </div>
+          
+          <div style="background:hsl(var(--primary) / .03); border:1px solid hsl(var(--primary) / .1); border-radius:1.5rem; padding:2.5rem;">
+            <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; margin-bottom:2rem; text-align:center;">Impacto Logrado</h3>
+            <div style="display:flex; flex-direction:column; gap:2rem;">
+              <div style="text-align:center;">
+                <div style="font-size:2rem; font-weight:700; color:hsl(var(--primary));">80</div>
+                <div style="color:hsl(var(--muted-foreground)); font-size:0.9rem;">Decisiones por Cristo</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:2rem; font-weight:700; color:hsl(var(--primary));">623</div>
+                <div style="color:hsl(var(--muted-foreground)); font-size:0.9rem;">Atenciones Médicas</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:2rem; font-weight:700; color:hsl(var(--primary));">500+</div>
+                <div style="color:hsl(var(--muted-foreground)); font-size:0.9rem;">Biblias distribuidas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Embed -->
+    <section style="padding:4rem 0; background: #000;" class="reveal">
+      <div style="max-width:50rem; margin:0 auto; padding:0 1rem;">
+        <div style="position:relative; padding-bottom: 56.25%; height: 0; border-radius: 1rem; overflow:hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+          <iframe style="position:absolute; top:0; left:0; width:100%; height:100%;" src="https://www.youtube.com/embed/0DDFRJcaITk?si=NQelqlWy_7gKZBNS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Objectives & Achievements (Cards) -->
+    <section style="padding:5rem 0; background:hsl(var(--muted) / .3);" class="reveal">
+      <div style="max-width:80rem; margin:0 auto; padding:0 1rem;">
+        <div class="grid grid-cols-1 md:grid-cols-2" style="gap:3rem;">
+          <!-- Objectives Card -->
+          <div class="jita-card" style="padding:2.5rem; border:none; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <h3 style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; margin-bottom:2rem; display:flex; align-items:center; gap:0.75rem;">
+              <span id="obj-icon"></span> Objetivos
+            </h3>
+            <ul style="display:flex; flex-direction:column; gap:1.25rem; list-style:none; padding:0; color:hsl(var(--muted-foreground));">
+              <li style="display:flex; gap:1rem; align-items:start;">
+                <span style="color:hsl(var(--primary)); font-weight:bold; margin-top:0.2rem;">&bull;</span>
+                <span>Compartir el evangelio y distribuir biblias a cada familia.</span>
+              </li>
+              <li style="display:flex; gap:1rem; align-items:start;">
+                <span style="color:hsl(var(--primary)); font-weight:bold; margin-top:0.2rem;">&bull;</span>
+                <span>Entregar canastas de alimentos y preparar comidas calientes.</span>
+              </li>
+              <li style="display:flex; gap:1rem; align-items:start;">
+                <span style="color:hsl(var(--primary)); font-weight:bold; margin-top:0.2rem;">&bull;</span>
+                <span>Brindar atención médica gratuita a 500+ personas.</span>
+              </li>
+              <li style="display:flex; gap:1rem; align-items:start;">
+                <span style="color:hsl(var(--primary)); font-weight:bold; margin-top:0.2rem;">&bull;</span>
+                <span>Entregar juguetes y llevar alegría a los niños.</span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Achievements Card -->
+          <div class="jita-card" style="padding:2.5rem; border:none; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <h3 style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; margin-bottom:2rem; display:flex; align-items:center; gap:0.75rem;">
+              <span id="ach-icon"></span> Logros Detallados
+            </h3>
+            <ul style="display:flex; flex-direction:column; gap:1.25rem; list-style:none; padding:0; color:hsl(var(--muted-foreground));">
+              <li style="display:flex; gap:1rem; align-items:start;">
+                <span id="check-1"></span>
+                <span>Compartimos el evangelio con más de 800 personas.</span>
+              </li>
+              <li style="display:flex; gap:1rem; align-items:start;">
+                <span id="check-2"></span>
+                <span>Distribuimos 500+ biblias a familias.</span>
+              </li>
+              <li style="display:flex; gap:1rem; align-items:start;">
+                <span id="check-3"></span>
+                <span>Regalamos 300 juguetes a niños.</span>
+              </li>
+              <li style="display:flex; gap:1rem; align-items:start;">
+                <span id="check-4"></span>
+                <span>80 personas entregaron su vida a Cristo.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section style="padding:5rem 0;" class="reveal">
+      <div style="max-width:80rem; margin:0 auto; padding:0 1rem;">
+        <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom:3rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; margin:0 0 0.5rem;">Galería de la Misión</h2>
+            <p style="color:hsl(var(--muted-foreground)); margin:0;">Momentos capturados durante nuestro tiempo en Perú.</p>
+          </div>
+          <button class="btn btn-primary" id="btn-view-gallery">Ver todas las fotos</button>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4" style="gap:1rem;">
+          <div style="height:20rem; border-radius:1rem; overflow:hidden; cursor:pointer;" class="hover-lift" onclick="JITA.openLightbox('https://i.ibb.co/xKjkjWNb/mission2021-5.webp')">
+            <img src="https://i.ibb.co/xKjkjWNb/mission2021-5.webp" style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+          <div style="height:20rem; border-radius:1rem; overflow:hidden; cursor:pointer;" class="hover-lift" onclick="JITA.openLightbox('https://i.ibb.co/Fkh69J9d/mission2021-4.webp')">
+            <img src="https://i.ibb.co/Fkh69J9d/mission2021-4.webp" style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+          <div style="height:20rem; border-radius:1rem; overflow:hidden; cursor:pointer;" class="hover-lift" onclick="JITA.openLightbox('https://i.ibb.co/8D6LcskD/mission2021-2.webp')">
+            <img src="https://i.ibb.co/8D6LcskD/mission2021-2.webp" style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+          <div style="height:20rem; border-radius:1rem; overflow:hidden; cursor:pointer; position:relative;" class="hover-lift" id="gallery-more-trigger">
+            <img src="https://i.ibb.co/KcnrZJLR/mission2021-3.webp" style="width:100%; height:100%; object-fit:cover; filter: blur(4px) brightness(0.7);" />
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:1.5rem;">+2</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section (Infinite Carousel) -->
+    <section style="padding:5rem 0; background:hsl(var(--muted) / .3); overflow:hidden;" class="reveal">
+      <div style="max-width:80rem; margin:0 auto; padding:0 1rem;">
+        <div style="text-align:center; margin-bottom:4rem;">
+          <h2 style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; margin-bottom:1rem;">Equipo en el Campo</h2>
+          <p style="color:hsl(var(--muted-foreground));">Nuestro equipo ministerial presente en la Misión Perú 2021.</p>
+        </div>
+        
+        <div style="position:relative; margin:0 -1rem; padding:1rem 0;">
+          <div id="team-carousel-container" style="overflow:hidden; cursor:grab;">
+            <div id="team-carousel-track" style="display:flex; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); will-change: transform;">
+              <!-- Cards will be injected here -->
+            </div>
+          </div>
+          <!-- Navigation -->
+          <div style="display:flex; justify-content:center; gap:1rem; margin-top:3rem;">
+            <button id="team-prev" class="btn btn-outline btn-sm" style="width:3rem; height:3rem; border-radius:50%; padding:0; display:flex; align-items:center; justify-content:center;"></button>
+            <button id="team-next" class="btn btn-outline btn-sm" style="width:3rem; height:3rem; border-radius:50%; padding:0; display:flex; align-items:center; justify-content:center;"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section style="padding:5rem 0; background:linear-gradient(135deg,hsl(var(--primary) / .05),hsl(var(--accent) / .05));">
+      <div style="max-width:80rem; margin:0 auto; padding:0 1rem; text-align:center;">
+        <h2 style="font-family:'Playfair Display',serif; font-size:2.25rem; font-weight:700; margin-bottom:1.5rem;">¿Sientes el llamado a participar?</h2>
+        <p style="color:hsl(var(--muted-foreground)); max-width:36rem; margin:0 auto 2.5rem;">Únete a nosotros en futuras misiones similares y sé parte del cambio que Dios está haciendo en el mundo.</p>
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem;">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSezRHWkAxQnOFrZQO4XZY_GBAPwWj21TbzaabSABZ3QfqHeBg/viewform" target="_blank" class="btn btn-primary btn-lg">Únete al Equipo</a>
+          <button class="btn btn-outline btn-lg btn-donate">Donar para esta Causa</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="jita-footer"></div>
+
+  <script src="../translations.js"></script>
+  <script src="../script.js"></script>
+  <script>
+    // Lightbox helper
+    window.JITA.openLightbox = function(url) {
+      const html = `
+        <div style="display:flex; align-items:center; justify-content:center; height:100%; background:black; border-radius: 1rem; overflow:hidden;">
+          <img src="${url}" style="max-width:100%; max-height:85vh; object-fit:contain;" />
+        </div>
+      `;
+      JITA.modal(html);
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Icons
+      document.getElementById('back-icon').innerHTML = JITA.icon('chevronLeft');
+      document.getElementById('pin-icon').innerHTML = JITA.icon('mapPin');
+      document.getElementById('cal-icon').innerHTML = JITA.icon('calendar');
+      document.getElementById('obj-icon').innerHTML = `<span style="color:hsl(var(--primary));">${JITA.icon('target')}</span>`;
+      document.getElementById('ach-icon').innerHTML = `<span style="color:hsl(var(--primary));">${JITA.icon('award')}</span>`;
+      
+      const checks = ['check-1','check-2','check-3','check-4'];
+      checks.forEach(id => {
+        document.getElementById(id).innerHTML = `<span style="color:hsl(var(--primary)); margin-top:0.2rem;">${JITA.icon('checkCircle')}</span>`;
+      });
+
+      // Team Data (Actual members from equipo.html)
+      const fieldTeam = [
+        { name: 'David Roelofs', role: 'Director Ministerial', image: '../assets/images/team/David Roelofs.jpg' },
+        { name: 'Mónica Roelofs', role: 'Directora Ministerial', image: '../assets/images/team/MONICA ROELOFS_ROUND.jpg' },
+        { name: 'Jorge Luis Ayala', role: 'Misionero Colaborador', image: '../assets/images/team/JORGE LUIS AYALA_2_11zon.jpg' },
+        { name: 'Marife Albornoz', role: 'Misionera Colaboradora', image: '../assets/images/team/MARIFE ALBORNOZ_11zon.jpg' },
+        { name: 'Maria Alejandra Sotelo', role: 'Misionera Traductora', image: '../assets/images/team/MARIA ALEJANDRA SOTELO_6_11zon.jpg' },
+        { name: 'Kevin Schowengerdt', role: 'Misionero de Apoyo', image: '../assets/images/team/KEVIN SCHOWENGERDT_7_11zon.jpg' },
+        { name: 'Alberto Centeno', role: 'Misionero de Apoyo', image: '../assets/images/team/ALBERTO CENTENO_4_11zon.jpg' },
+        { name: 'Ana Chuna', role: 'Misionera de Apoyo', image: '../assets/images/team/ANA CHUNA_1_11zon.jpg' },
+        { name: 'Claudia Lorena Lopez', role: 'Misionera de Apoyo', image: '../assets/images/team/CLAUDIA LORENA LOPEZ_14_11zon.jpg' },
+        { name: 'Flor de María Pino', role: 'Misionera de Apoyo', image: '../assets/images/team/FLOR DE MARIA PINO_17_11zon.jpg' },
+        { name: 'Francy Elena Burbano', role: 'Misionera de Apoyo', image: '../assets/images/team/FRANCY ELENA BURBANO_3_11zon.jpg' },
+        { name: 'Giovanna Guzmán', role: 'Misionera de Apoyo', image: '../assets/images/team/GIOVANNA GUZMÁN_9.jpg' },
+        { name: 'Hofer Gordon', role: 'Misionero Pastoral', image: '../assets/images/team/HOFER GORDON_12_11zon.jpg' },
+        { name: 'Iván Galarza', role: 'Misionero Pastoral', image: '../assets/images/team/IVAN GALARZA_15_11zon.jpg' },
+        { name: 'Jorge Corahua', role: 'Misionero Pastoral', image: '../assets/images/team/JORGE CORAHUA_11_11zon.jpg' },
+        { name: 'Kelly Agudelo', role: 'Misionera de Apoyo', image: '../assets/images/team/KELLY AGUDELO_13_11zon.jpg' },
+        { name: 'Kelly Corrie Hofer', role: 'Misionera de Apoyo', image: '../assets/images/team/KELLY CORRIE HOFER_8_11zon.jpg' },
+        { name: 'Luis Ornelas', role: 'Misionero de Apoyo', image: '../assets/images/team/LUIS ORNELAS_16_11zon.jpg' },
+        { name: 'Sandra Milena Correa', role: 'Misionera de Apoyo', image: '../assets/images/team/SANDRA MILENA CORREA_10_11zon.jpg' }
+      ];
+
+      const track = document.getElementById('team-carousel-track');
+      const renderTeam = () => {
+        const cards = fieldTeam.map(m => `
+          <div class="team-slide" style="flex: 0 0 100%; min-width: 0; padding: 0 1rem; transition: flex-basis 0.3s ease;">
+            <div class="jita-card" style="padding:1.5rem; text-align:center; height:100%;">
+              <img src="${m.image}" alt="${m.name}" style="width:5rem; height:5rem; border-radius:50%; object-fit:cover; margin:0 auto 1.25rem; border: 2px solid hsl(var(--primary) / .2);" />
+              <h4 style="font-weight:700; margin:0; font-size:1rem;">${m.name}</h4>
+              <p style="color:hsl(var(--primary)); font-size:0.8rem; font-weight:600; margin-top:0.25rem;">${m.role}</p>
+            </div>
+          </div>
+        `).join('');
+        track.innerHTML = cards + cards; // Clone for infinite
+      };
+      renderTeam();
+
+      // Carousel Logic
+      let currentIdx = 0;
+      let isPaused = false;
+      
+      const getVisible = () => {
+        if (window.innerWidth < 640) return 1;
+        if (window.innerWidth < 1024) return 2;
+        if (window.innerWidth < 1440) return 3;
+        return 4;
+      };
+      
+      const updateTrack = (smooth = true) => {
+        const visible = getVisible();
+        const width = 100 / visible;
+        document.querySelectorAll('.team-slide').forEach(s => s.style.flex = `0 0 ${width}%`);
+        track.style.transition = smooth ? 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)' : 'none';
+        track.style.transform = `translateX(-${currentIdx * width}%)`;
+      };
+
+      const nextSlide = () => {
+        currentIdx++;
+        updateTrack();
+        if (currentIdx >= fieldTeam.length) {
+          setTimeout(() => {
+            currentIdx = 0;
+            updateTrack(false);
+          }, 600);
+        }
+      };
+
+      const prevSlide = () => {
+        if (currentIdx <= 0) {
+          currentIdx = fieldTeam.length;
+          updateTrack(false);
+          setTimeout(() => {
+            currentIdx--;
+            updateTrack();
+          }, 10);
+        } else {
+          currentIdx--;
+          updateTrack();
+        }
+      };
+
+      document.getElementById('team-next').addEventListener('click', () => { nextSlide(); resetAuto(); });
+      document.getElementById('team-prev').addEventListener('click', () => { prevSlide(); resetAuto(); });
+      document.getElementById('team-next').innerHTML = JITA.icon('arrowRight');
+      document.getElementById('team-prev').innerHTML = JITA.icon('arrowLeft');
+
+      let timer = setInterval(() => { if(!isPaused) nextSlide(); }, 3000);
+      const resetAuto = () => { clearInterval(timer); timer = setInterval(() => { if(!isPaused) nextSlide(); }, 3000); };
+
+      const container = document.getElementById('team-carousel-container');
+      container.addEventListener('mouseenter', () => isPaused = true);
+      container.addEventListener('mouseleave', () => isPaused = false);
+      container.addEventListener('touchstart', () => isPaused = true, {passive:true});
+      container.addEventListener('touchend', () => { setTimeout(() => isPaused = false, 2000); }, {passive:true});
+
+      window.addEventListener('resize', () => updateTrack(false));
+      updateTrack(false);
+
+      // Gallery Modal
+      const galleryImages = [
+        'https://i.ibb.co/xKjkjWNb/mission2021-5.webp',
+        'https://i.ibb.co/Fkh69J9d/mission2021-4.webp',
+        'https://i.ibb.co/8D6LcskD/mission2021-2.webp',
+        'https://i.ibb.co/KcnrZJLR/mission2021-3.webp',
+        'https://i.ibb.co/x81Zxq3x/mission2021-1.webp'
+      ];
+
+      function openGallery() {
+        const html = `
+          <div style="padding:1rem;">
+            <h3 style="font-family:'Playfair Display',serif; font-size:1.75rem; margin-bottom:1.5rem; text-align:center;">Galería Completa</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3" style="gap:1rem; max-height:70vh; overflow-y:auto; padding:0.5rem;">
+              ${galleryImages.map(img => `
+                <div style="border-radius:0.5rem; overflow:hidden; aspect-ratio:4/3; cursor:pointer;" class="hover-lift" onclick="JITA.openLightbox('${img}')">
+                  <img src="${img}" style="width:100%; height:100%; object-fit:cover;" />
+                </div>
+              `).join('')}
+            </div>
+            <p style="text-align:center; font-size:0.8rem; color:hsl(var(--muted-foreground)); margin-top:1rem;">Haz clic en una imagen para verla en pantalla completa.</p>
+          </div>
+        `;
+        JITA.modal(html);
+      }
+
+      document.getElementById('btn-view-gallery').addEventListener('click', openGallery);
+      document.getElementById('gallery-more-trigger').addEventListener('click', openGallery);
+
+      JITA.applyTranslations();
+      document.addEventListener('jita:lang-changed', () => JITA.applyTranslations());
+    });
+  </script>
+</body>
+</html>
