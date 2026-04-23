@@ -41,6 +41,8 @@ Selector ES / EN en la navbar. La preferencia se guarda en `localStorage` (`jita
 
 ## Notas
 
-- Tailwind se carga vía CDN (`cdn.tailwindcss.com`) y se complementa con tu propio sistema en `styles.css` usando los mismos tokens HSL del proyecto original.
+- Tailwind se gestiona vía CLI. El archivo de entrada es `src/input.css` y se compila a `dist/styles.css`.
+- Para desarrollar, usa `npm run dev` para observar cambios en tiempo real.
+- Para producción, usa `npm run build` para minificar el CSS.
 - El "router" de React fue reemplazado por archivos HTML separados.
 - El form de aplicación muestra un toast de éxito (no envía datos a ningún backend).

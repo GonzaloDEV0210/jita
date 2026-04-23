@@ -1,0 +1,16 @@
+{
+  "name": "jita",
+  "version": "1.0.0",
+  "description": "Versión estática del sitio **Jesus Is The Answer LLC**, sin React ni build step.",
+  "main": "application-form.js",
+  "scripts": {
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/styles.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/styles.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}
